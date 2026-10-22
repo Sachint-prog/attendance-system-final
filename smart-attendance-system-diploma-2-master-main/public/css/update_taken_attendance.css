@@ -1,0 +1,617 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgba(125, 125, 125, 0.2);
+    background-image: url(../img/mu_2.jpg);  
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column ;
+}
+a .bxs-home{
+    font-size: 25px;
+    color: white;
+    /* border: 2px solid black; */
+    margin: 20px;
+    /* position: fixed; */
+    transition: .3s;
+}
+a .bxs-home:hover{
+    scale: 1.2;
+    color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.546);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  
+}
+.option_1{
+    width: 200px;
+    height: 30px;
+    position: absolute;
+    padding: 0px 0px 0px 10px;
+    left: 27%;
+    top: 15%;
+    font-size: 1rem;
+}
+.option_2{
+    width: 200px;
+    height: 30px;
+    position: absolute;
+    padding: 0px 0px 0px 10px;
+    right: 27%;
+    top: 15%;
+    font-size: 1em;
+}
+.option_3{
+    width: 200px;
+    height: 30px;
+    position: absolute;
+    padding: 0px 0px 0px 10px;
+    right: 42%;
+    top: 8%;
+    font-size: 1em;
+}
+.log_btn_1{
+    position: absolute;
+    top: 27%;
+    padding: 12px 22px;
+    border-radius: 10%;
+    transition: 0.5s;
+    margin-left: 5px;
+}
+.log_btn_1:hover{
+    scale: 1.1;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.546);
+    /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); */
+}
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 10px;
+}
+table{
+    position: absolute;
+    width: 47%;
+    top: 35%;
+    right: 26.5%;
+    overflow-y:scroll;
+    height: 50%;
+    display:block;
+}
+th,td{
+    padding: 8px;
+    background-color: white;
+}
+.srno{
+    width: 5%;
+    text-align: center;
+}
+.checkbox{
+    width: 5%;
+    text-align: center;
+}
+.en{
+    width: 10%;
+    text-align: center;
+}
+.name{
+    width: 20%;
+}
+.p{
+    width: fit-content;
+    color: white;
+    font-size: 20px;
+    -webkit-text-stroke: .5px black;
+    position: absolute;
+    bottom: 3%;
+    right: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.a{
+    width: fit-content;
+    color: white;
+    font-size: 20px;
+    -webkit-text-stroke: .5px black;
+    position: absolute;
+    bottom: 3%;
+    right: 57%;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+a .bxs-home{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+.log_btn_2{
+    padding: 12px 22px;
+    border-radius: 10%;
+    transition: 0.5s;
+    margin-left: 5px;
+    position: absolute;
+    bottom: 2%;
+    right: 41.5%;
+    width: 85px;
+    height: 43px;
+}
+.log_btn_2:hover{
+    scale: 1.1;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.546);
+}
+.log_btn_3{
+    padding: 12px 22px;
+    border-radius: 10%;
+    transition: 0.5s;
+    margin-left: 5px;
+    position: absolute;
+    bottom: 2%;
+    right: 35%;
+    width: 85px;
+    height: 43px;
+}
+.log_btn_3:hover{
+    scale: 1.1;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.546);
+}
+
+.table_{
+    height: auto;
+}
+.lecture_container{
+    display: flex;
+    gap: 1em;
+    position: absolute;
+    top: 21%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px;
+}
+.page_box{
+    position: absolute;
+    bottom: 11%;
+}
+.pages{
+    width: 30px;
+    height: 20px;
+}
+.pages:hover{
+    scale: 1.2;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.546);
+}
+@media only screen and (max-width: 1920px){
+    .option_3{
+        right: 43%;
+    }
+}
+@media only screen and (max-width: 1370px){
+    .option_1{
+        top: 15%;
+        left: 15%;
+    }
+    .option_2{
+        top: 15%;
+        right: 15%;;
+    }
+    .option_3{
+        right: 42%;
+    }
+    table{
+        width: 70%;
+        left: 15%;
+    }
+    .a{
+        left: 20%;
+    }
+    .p{
+        left: 30%;
+    }
+    .log_btn_2{
+        right: 40%;
+    }
+    .log_btn_3{
+        right: 30%;
+    }
+}
+@media only screen and (max-width: 1250px){
+    .a{
+        left: 15%;
+    }
+    .p{
+        left: 25%;
+    }
+    .log_btn_2{
+        right: 40%;
+    }
+    .log_btn_3{
+        right: 30%;
+    }
+}
+@media only screen and (max-width: 1090px){
+    .option_3{
+        right: 40%;
+    }
+    .a{
+        left: 7%;
+    }
+    .p{
+        left: 22%;
+    }
+    .log_btn_2{
+        right: 33%;
+    }
+    .log_btn_3{
+        right: 20%;
+    }
+}
+@media only screen and (max-width: 930px){
+    .option_1{
+        top: 15%;
+        left: 13%;
+    }
+    .option_2{
+        top: 15%;
+        right: 13%;;
+    }
+    table{
+        width: 75%;
+        left: 12.5%;
+    }
+    .a{
+        left: 5%;
+    }
+    .p{
+        left: 25%;
+    }
+    .log_btn_2{
+        right: 33%;
+    }
+    .log_btn_3{
+        right: 20%;
+    }
+}
+@media only screen and (max-width: 870px){
+    .option_3{
+        right: 38%;
+    }
+    .a{
+        left: 5%;
+    }
+    .p{
+        left: 25%;
+    }
+    .log_btn_2{
+        right: 30%;
+    }
+    .log_btn_3{
+        right: 15%;
+    }
+}
+@media only screen and (max-width: 710px){
+    .option_1{
+        top: 18%;
+        left: 12%;
+    }
+    .option_2{
+        top: 18%;
+        right: 12%;;
+    }
+    .option_3{
+        right: 36%;
+    }
+    .lecture_container{
+        top: 25%;
+        flex-direction: column;
+    }
+    .log_btn_1{
+        top: 50%;
+    }
+    table{
+        top: 30%;
+        width: 70%;
+        left: 15%;
+    }
+    .a{
+        bottom: 8%;
+        left: 3%;
+    }
+    .p{
+        bottom: 8%;
+        left: 27%;
+    }
+    .log_btn_2{
+        bottom: 8%;
+        right: 33%;
+    }
+    .log_btn_3{
+        bottom: 8%;
+        right: 15%;
+    }
+    .page_box{
+        bottom: 15%;
+    }
+}
+@media only screen and (max-width: 610px){
+    .option_3{
+        right: 33%;
+    }
+    table{
+        width: 75%;
+        left: 13%;
+    }
+    th,td{
+        padding: 5px;
+    }
+    .a{
+        left: 3%;
+    }
+    .p{
+        left: 30%;
+    }
+    .log_btn_2{
+        right: 32%;
+    }
+    .log_btn_3{
+        right: 13%;
+    }
+}
+@media only screen and (max-width: 540px){
+    .option_1{
+        width: 170px;
+        top: 18%;
+        left: 10%;
+    }
+    .option_2{
+        width: 170px;
+        top: 18%;
+        right: 10%;
+    }
+    .option_3{
+        width: 170px;
+        right: 34%;
+    }
+    .lecture_container{
+        top: 25%;
+        flex-direction: column;
+    }
+    .log_btn_1{
+        top: 56%;
+    }
+}
+@media only screen and (max-width: 500px){
+    .option_1{
+        width: 150px;
+        top: 18%;
+        left: 12%;
+    }
+    .option_2{
+        width: 150px;
+        top: 18%;
+        right: 12%;;
+    }
+    .option_3{
+        width: 150PX;
+        right: 35%;
+    }
+    .lecture_container{
+        top: 25%;
+        flex-direction: column;
+    }
+    .log_btn_1{
+        top: 56%;
+    }
+    table{
+        width: 80%;
+        left: 10%;
+    }
+    th,td{
+        padding: 5px;
+    }
+    .a{
+        bottom: 10%;
+        left: 29%;
+    }
+    .p{
+        bottom: 10%;
+        left: 65%;
+    }
+    .log_btn_2{
+        bottom: 4%;
+        right: 55%;
+    }
+    .log_btn_3{
+        bottom: 4%;
+        right: 25%;
+    }
+}
+@media only screen and (max-width: 425px){
+    .option_1{
+        width: 150px;
+        top: 18%;
+        left: 12%;
+    }
+    .option_2{
+        width: 150px;
+        top: 18%;
+        right: 12%;;
+    }
+    .option_3{
+        width: 150PX;
+        right: 31%;
+    }
+    .lecture_container{
+        top: 25%;
+        flex-direction: column;
+    }
+    .log_btn_1{
+        top: 56%;
+    }
+    table{
+        width: 90%;
+        left: 5%;
+        top: 30%;
+    }
+    th,td{
+        padding: 5px;
+        
+    }
+    .a{
+        bottom: 10%;
+        left: 29%;
+    }
+    .p{
+        bottom: 10%;
+        left: 65%;
+    }
+    .log_btn_2{
+        bottom: 4%;
+        right: 55%;
+    }
+    .log_btn_3{
+        bottom: 4%;
+        right: 25%;
+    }
+}
+@media only screen and (max-width: 400px){
+    .option_1{
+        width: 150px;
+        top: 13%;
+        left: 28%;
+    }
+    .option_2{
+        width: 150px;
+        top: 18%;
+        left: 28%;;
+    }
+    .option_3{
+        width: 150PX;
+        left: 28%;
+    }
+    .lecture_container{
+        top: 25%;
+        left: 38%;
+        flex-direction: column;
+    }
+    .log_btn_1{
+        top: 56%;
+        left: 38%;
+    }
+    table{
+        width: 90%;
+        left: 5%;
+        top: 30%;
+    }
+    .name{
+        text-align: center;
+    }
+    th,td{
+        padding: 5px;
+    }
+    .a{
+        bottom: 10%;
+        left: 29%;
+    }
+    .p{
+        bottom: 10%;
+        left: 65%;
+    }
+    .log_btn_2{
+        bottom: 4%;
+        right: 55%;
+    }
+    .log_btn_3{
+        bottom: 4%;
+        right: 25%;
+    }
+}
+@media only screen and (max-width: 390px){
+    table{
+        width: 90%;
+        left: 5%;
+        top: 30%;
+    }
+    th,td{
+        padding: 5px;
+    }
+    .lecture_container{
+        top: 25%;
+        left: 42%;
+        flex-direction: column;
+    }
+    .name{
+        text-align: center;
+    }
+    .a{
+        left: 20%;
+    }
+    .p{
+        left: 65%;
+    }
+    .log_btn_2{
+        bottom: 4%;
+        right: 57%;
+    }
+    .log_btn_3{
+        bottom: 4%;
+        right: 23%;
+    }
+}
+@media only screen and (max-width: 280px){
+    .option_1{
+        width: 150px;
+        top: 13%;
+        left: 22%;
+    }
+    .option_2{
+        width: 150px;
+        top: 18%;
+        left: 22%;;
+    }
+    .option_3{
+        width: 150PX;
+        left: 23%;
+    }
+    .lecture_container{
+        top: 25%;
+        left: 35%;
+        flex-direction: column;
+    }
+    table{
+        left: 4.5%;
+    }
+    .log_btn_1{
+        top: 56%;
+        left: 35%;
+    }
+    .a{
+        bottom: 10%;
+        left: 20%;
+    }
+    .p{
+        bottom: 10%;
+        left: 67%;
+    }
+    .log_btn_2{
+        bottom: 2%;
+        right: 52%;
+    }
+    .log_btn_3{
+        bottom: 2%;
+        right: 18%;
+    }
+}

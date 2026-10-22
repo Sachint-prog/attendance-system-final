@@ -1,0 +1,51 @@
+const express = require('express')
+const router = express.Router()
+const hodController = require('../controllers/hod')
+
+
+const isAuth = (req, res, next) => {
+    if(req.session.isAuth && req.session.user_id.role == 'hod'){
+        next()
+    }else if (req.session.isAuth) {
+        res.redirect('/faculty')
+    }else{
+        res.redirect('/login')
+    }
+}
+
+router.get('/',isAuth, hodController.getHome)
+
+
+// router.get('/branchCoures',isAuth, facultyController.getBranch_coures)
+// router.get('/branchCoures/it',isAuth, facultyController.getIT)
+
+// router.get('/branch_coures',isAuth, facultyController.getBranch_coures)
+// router.get('/scanner', isAuth,facultyController.getScanner)
+// router.get('/show_attendance',isAuth, facultyController.show_attendance)
+// router.get('/update_attendance',isAuth, facultyController.update_attendance)
+// router.get('/delete_attendance',isAuth, facultyController.delete_attendance)
+// router.get('/dummy', facultyController.dummy)
+
+// router.post('/showAttendance',isAuth, facultyController.showAttendance)
+// router.post('/updateAttendance',isAuth, facultyController.updateAttendance)
+// router.post('/deleteAttendance',isAuth, facultyController.deleteAttendance)
+// router.post('/addEnrollmentNo',isAuth, facultyController.addEnrollmentNo)
+// router.post('/manually_add_user',isAuth, facultyController.manually_add_user)
+
+
+
+// router.get('/create_subject',isAuth, hodController.create_subject)
+// router.get('/show_subject',isAuth, hodController.show_subject)
+// router.get('/update_subject',isAuth, hodController.update_subject)
+// router.get('/delete_subject',isAuth, hodController.delete_subject)
+
+
+// router.post('/createSubject',isAuth, hodController.createSubject)
+// router.post('/updateSubject',isAuth, hodController.updateSubject)
+// router.post('/deleteSubject',isAuth, hodController.deleteSubject)
+// router.post('/courses', isAuth, hodController.courses)
+
+router.post('/logout', isAuth, hodController.logout)
+
+
+module.exports = router

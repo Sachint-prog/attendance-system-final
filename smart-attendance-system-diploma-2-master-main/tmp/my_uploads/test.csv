@@ -1,0 +1,303 @@
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/test.csv' 
+INTO TABLE test_1 
+FIELDS TERMINATED BY ',' 
+IGNORE 1 ROWS;
+
+create table schema_master(
+            sr_no char(255),
+            Enrollment_no char(255),
+            Student_name char(255),
+            d1_l1 char(10),
+            d1_l2 char(10),
+            d1_l3 char(10),
+            d1_l4 char(10),
+            d1_l5 char(10),
+            d1_l6 char(10),
+            d2_l1 char(10),
+            d2_l2 char(10),
+            d2_l3 char(10),
+            d2_l4 char(10),
+            d2_l5 char(10),
+            d2_l6 char(10),
+            d3_l1 char(10),
+            d3_l2 char(10),
+            d3_l3 char(10),
+            d3_l4 char(10),
+            d3_l5 char(10),
+            d3_l6 char(10),
+            d4_l1 char(10),
+            d4_l2 char(10),
+            d4_l3 char(10),
+            d4_l4 char(10),
+            d4_l5 char(10),
+            d4_l6 char(10),
+            d5_l1 char(10),
+            d5_l2 char(10),
+            d5_l3 char(10),
+            d5_l4 char(10),
+            d5_l5 char(10),
+            d5_l6 char(10),
+            d6_l1 char(10),
+            d6_l2 char(10),
+            d6_l3 char(10),
+            d6_l4 char(10),
+            d6_l5 char(10),
+            d6_l6 char(10),
+            d7_l1 char(10),
+            d7_l2 char(10),
+            d7_l3 char(10),
+            d7_l4 char(10),
+            d7_l5 char(10),
+            d7_l6 char(10),
+            d8_l1 char(10),
+            d8_l2 char(10),
+            d8_l3 char(10),
+            d8_l4 char(10),
+            d8_l5 char(10),
+            d8_l6 char(10),
+            d9_l1 char(10),
+            d9_l2 char(10),
+            d9_l3 char(10),
+            d9_l4 char(10),
+            d9_l5 char(10),
+            d9_l6 char(10),
+            d10_l1 char(10),
+            d10_l2 char(10),
+            d10_l3 char(10),
+            d10_l4 char(10),
+            d10_l5 char(10),
+            d10_l6 char(10),
+            d11_l1 char(10),
+            d11_l2 char(10),
+            d11_l3 char(10),
+            d11_l4 char(10),
+            d11_l5 char(10),
+            d11_l6 char(10),
+            d12_l1 char(10),
+            d12_l2 char(10),
+            d12_l3 char(10),
+            d12_l4 char(10),
+            d12_l5 char(10),
+            d12_l6 char(10),
+            d13_l1 char(10),
+            d13_l2 char(10),
+            d13_l3 char(10),
+            d13_l4 char(10),
+            d13_l5 char(10),
+            d13_l6 char(10),
+            d14_l1 char(10),
+            d14_l2 char(10),
+            d14_l3 char(10),
+            d14_l4 char(10),
+            d14_l5 char(10),
+            d14_l6 char(10),
+            d15_l1 char(10),
+            d15_l2 char(10),
+            d15_l3 char(10),
+            d15_l4 char(10),
+            d15_l5 char(10),
+            d15_l6 char(10),
+            d16_l1 char(10),
+            d16_l2 char(10),
+            d16_l3 char(10),
+            d16_l4 char(10),
+            d16_l5 char(10),
+            d16_l6 char(10),
+            d17_l1 char(10),
+            d17_l2 char(10),
+            d17_l3 char(10),
+            d17_l4 char(10),
+            d17_l5 char(10),
+            d17_l6 char(10),
+            d18_l1 char(10),
+            d18_l2 char(10),
+            d18_l3 char(10),
+            d18_l4 char(10),
+            d18_l5 char(10),
+            d18_l6 char(10),
+            d19_l1 char(10),
+            d19_l2 char(10),
+            d19_l3 char(10),
+            d19_l4 char(10),
+            d19_l5 char(10),
+            d19_l6 char(10),
+            d20_l1 char(10),
+            d20_l2 char(10),
+            d20_l3 char(10),
+            d20_l4 char(10),
+            d20_l5 char(10),
+            d20_l6 char(10),
+            d21_l1 char(10),
+            d21_l2 char(10),
+            d21_l3 char(10),
+            d21_l4 char(10),
+            d21_l5 char(10),
+            d21_l6 char(10),
+            d22_l1 char(10),
+            d22_l2 char(10),
+            d22_l3 char(10),
+            d22_l4 char(10),
+            d22_l5 char(10),
+            d22_l6 char(10),
+            d23_l1 char(10),
+            d23_l2 char(10),
+            d23_l3 char(10),
+            d23_l4 char(10),
+            d23_l5 char(10),
+            d23_l6 char(10),
+            d24_l1 char(10),
+            d24_l2 char(10),
+            d24_l3 char(10),
+            d24_l4 char(10),
+            d24_l5 char(10),
+            d24_l6 char(10),
+            d25_l1 char(10),
+            d25_l2 char(10),
+            d25_l3 char(10),
+            d25_l4 char(10),
+            d25_l5 char(10),
+            d25_l6 char(10),
+            d26_l1 char(10),
+            d26_l2 char(10),
+            d26_l3 char(10),
+            d26_l4 char(10),
+            d26_l5 char(10),
+            d26_l6 char(10),
+            d27_l1 char(10),
+            d27_l2 char(10),
+            d27_l3 char(10),
+            d27_l4 char(10),
+            d27_l5 char(10),
+            d27_l6 char(10),
+            d28_l1 char(10),
+            d28_l2 char(10),
+            d28_l3 char(10),
+            d28_l4 char(10),
+            d28_l5 char(10),
+            d28_l6 char(10),
+            d29_l1 char(10),
+            d29_l2 char(10),
+            d29_l3 char(10),
+            d29_l4 char(10),
+            d29_l5 char(10),
+            d29_l6 char(10),
+            d30_l1 char(10),
+            d30_l2 char(10),
+            d30_l3 char(10),
+            d30_l4 char(10),
+            d30_l5 char(10),
+            d30_l6 char(10),
+            d31_l1 char(10),
+            d31_l2 char(10),
+            d31_l3 char(10),
+            d31_l4 char(10),
+            d31_l5 char(10),
+            d31_l6 char(10),
+            total int
+);
+
+
+create database student;
+use student;
+
+CREATE TABLE master_table(
+course char(255),
+branch char(255),
+sem char(255),
+subject char(255),
+id int AUTO_INCREMENT PRIMARY KEY, 
+); 
+
+LOAD DATA LOCAL INFILE  '/home/debian/Desktop/test.csv'
+INTO TABLE stu2
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA LOCAL INFILE '/home/debian/Documents/smart-attendance-system-diploma-main/tmp/my_uploads/test_1.csv' 
+INTO TABLE stu2
+FIELDS TERMINATED BY ',' 
+IGNORE 1 ROWS;
+
+
+select distinct id from master_table_3 where course = 'Diploma' and branch = 'IT' and sem  = 'sem2';
+
+update y2024_m04_stu2 set d9_l3 = '0' where Student_name = 'ABSENT';
+update y2024_m04_stu2 set d9_l3 = '0' where Student_name = 'PRESENT';
+
+
+select d${date}_l${lecture} from ${monthly_table} where Student_name = 'PRESENT'
+
+
+<% for(let i = pages_data.current_page; i < pages_data.current_page + 30; i++){ %>
+
+
+
+
+
+
+
+CREATE TABLE master_table_2 AS SELECT distinct course, branch, sem FROM user_access;
+ALTER TABLE master_table_2 ADD id MEDIUMINT NOT NULL AUTO_INCREMENT KEY;
+
+LOAD DATA INFILE 'C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\sem4_it.csv' 
+INTO TABLE stu4
+FIELDS TERMINATED BY ',' 
+IGNORE 1 ROWS;
+
+
+
+CREATE TABLE y2024_m03_stu1 AS SELECT * from y2024_m04_stu1;
+
+
+ALTER TABLE user_access
+RENAME COLUMN Dean_Email to dean_Email;
+ALTER TABLE user_access
+RENAME COLUMN admin_Email to Admin_Email;
+
+create table overview_chart_table(
+    id int AUTO_INCREMENT PRIMARY KEY,
+    faculty char(255),
+    course char(100),
+    branch char(255),
+    sem char(100),
+    starting_date char(100),
+    end_date char(100),
+    current_state char(100)
+);
+
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/over_view_chart.csv' 
+INTO TABLE overview_chart_table
+FIELDS TERMINATED BY ','
+IGNORE 1 ROWS;
+
+CREATE TABLE master_table_2 AS SELECT * from overview_chart_table;
+
+update master_table_3 set faculty = 'facultyOfEngAndTech';
+
+
+create table user_access(
+    course char(255),
+    branch char(255),
+    sem char(255),
+    subject char(255),
+    Subject_Initial char(255),
+    faculty_Email char(255),
+    hod_Email char(255),
+    dean_Email char(255),
+    Admin_Email char(255)
+);
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/name.csv' 
+INTO TABLE user_access
+FIELDS TERMINATED BY ','
+IGNORE 1 ROWS;
+
+
+ALTER TABLE master_table_3
+RENAME COLUMN current_status to current_state;
+
+
+select branch, sem from master_table_3 where faculty = 'facultyOfEngAndTech' and current_state = 'studying';

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance Page</title>
+<link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/hod_home.css">
+<style>
+    footer{
+        position: absolute;
+        left: 0;
+        bottom: -50%;
+        width: 100%;
+    }
+    .container_footer {
+        background-color: #333;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .footer {
+        background-color: #333;
+        color: #fff;
+        padding-top: 40px;
+        height: 300px;
+    }
+    .logo img {
+        max-width: 100px;
+    }
+    .introduction {
+        max-width: 400px;
+        padding: 25px;
+    }
+    .contact_us {
+        /* border: 1px solid #fff; */
+        max-width: 300px;
+    }
+    .contact_us h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .social_media {
+        background-color: #333;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 20px;
+    }
+    .social_media i {
+        font-size: 24px;
+        color: #fff;
+        margin: 0 10px;
+        transition: color 0.3s;
+    }
+    .social_media i:hover {
+        color: #ffd700; 
+    }
+</style>
+</head>
+<body>
+    <a href="/<%=user_id.role%>"><i class='bx bxs-home'></i></a>
+    <div class="container">
+        <div class="box">
+            <a id="scanner" href="<%=original_url%>/take_attendance">Take Attendance</a>
+            <a id="scanner" href="<%=original_url%>/show_taken_attendance">Show Attendance</a>
+            <a id="scanner" href="<%=original_url%>/update_taken_attendance">Update Attendance</a>
+            <!-- <a id="scanner" href="<%=original_url%>/uploads">upload a file</a>
+            <a id="scanner" href="<%=original_url%>/overview_chart">overview chart</a>
+            <a id="scanner" href="<%=original_url%>/student_chart">student chart</a> -->
+
+            <!-- <a id="scanner" href="/hod/scanner"> <i class='bx bx-qr-scan'></i> Scanner here </a>
+            <a id="show_attendance" href="/hod/show_attendance"><i class='bx bxs-show'></i>Show Attendance</a>
+            <a id="update" href="/hod/update_attendance"><i class='bx bxs-edit'></i>Update Attendance</a>
+            <a id="delete" href="/hod/delete_attendance"><i class='bx bxs-trash' ></i>Delete Attendance</a> -->
+        </div>
+        <!-- <div class="box">
+            <a id="scanner" href="/hod/create_subject"><i class='bx bxs-book-add'></i></i>Create Subject</a>
+            <a id="show_attendance" href="/hod/show_subject"><i class='bx bxs-show'></i>Show Subject</a>
+            <a id="update" href="/hod/update_subject"><i class='bx bxs-edit'></i>Update Subject</a>
+            <a id="delete" href="/hod/delete_subject"><i class='bx bxs-trash' ></i>Delete Subject</a>
+        </div> -->
+    </div>
+    <!-- <form action="<%=user_id.role%>/logout" method="post" class="logout">
+        <button id="log_btn"><i class='bx bx-log-out'></i>Logout</button>
+    </form> -->
+    <footer class="footer">
+        <div class="container_footer">
+            <div class="logo_footer">
+                <img src="/img/favicon.png" alt="image" height="100px" width="100px">
+            </div>
+            <div class="introduction">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem numquam, quod ut accusamus pariatur qui odio tempore eveniet libero enim ducimus eligendi officia fugiat magni dolorem, vero explicabo commodi voluptatibus rem aliquid. Quisquam unde in at cumque quaerat eaque, facilis sapiente illo accusantium amet repellendus nesciunt ratione. Consequatur, qui similique.</p>
+            </div>
+            <div class="contact_us">
+                <h1>Contact Us</h1>
+                <!-- <label for="Email">Email</label>
+                <input type="email" name="Email"> -->
+                <h3>Email - muhkvps.sas@gmail.com</h3>
+            </div>
+        </div>
+        <div class="container1_footer">
+            <div class="social_media">
+                <a href="#">
+                    <i class='bx bxl-meta'></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-instagram-alt' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-facebook-circle' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-instagram' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-twitter' ></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,595 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+body{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(125, 125, 125, 0.2);
+    background-image: url("../img/mu_2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+}
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+.btn{
+    font-size: 1em;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.btn:hover{
+    scale: 1.2;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+.start{
+    filter: opacity(0);
+}
+.dummy{
+    text-decoration: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+#IT{
+    position: absolute;
+    top: 28%;
+    right: 40%;
+    width: 120px;
+    
+    text-align: center;
+}
+#CE{
+    position: absolute;
+    right: 32%;
+    top: 40%;
+    width: 120px;
+    text-align: center;
+}
+#ME{
+    position: absolute;
+    right: 32%;
+    bottom: 40%;
+    width: 120px;
+    text-align: center;
+}
+#EE{
+    position: absolute;
+    right: 40%;
+    bottom: 28%;
+    width: 120px;
+    text-align: center;
+}
+#CIVIL{
+    position: absolute;
+    top: 28%;
+    left: 40%;
+    width: 120px;
+    text-align: center;
+}
+#AUTO{
+    position: absolute;
+    left: 32%;
+    top: 40%;
+    width: 120px;
+    text-align: center;
+}
+#CHEMICAL{
+    position: absolute;
+    left: 32%;
+    bottom: 40%;
+    width: 120px;
+    text-align: center;
+
+}
+#EC{
+    position: absolute;
+    left: 40%;
+    bottom: 28%;
+    width: 120px;
+    text-align: center;
+}
+a i{
+    font-size: 25px;
+    color: white;
+    /* border: 2px solid black; */
+    margin: 20px;
+    /* position: fixed; */
+    transition: .3s;
+}
+a i:hover{
+    scale: 1.2;
+    color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.546);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  
+}
+.home{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+@media only screen and (max-width: 1024px){
+    #IT{
+        position: absolute;
+        top: 25%;
+        right: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #CE{
+        position: absolute;
+        top: 40%;
+        right: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #ME{
+        position: absolute;
+        bottom: 40%;
+        right: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #EE{
+        position: absolute;
+        bottom: 25%;
+        right: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #CIVIL{
+        position: absolute;
+        top: 25%;
+        left: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #AUTO{
+        position: absolute;
+        top: 40%;
+        left: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #CHEMICAL{
+        position: absolute;
+        bottom: 40%;
+        left: 30%;
+        width: 120px;
+        text-align: center;
+    
+    }
+    #EC{
+        position: absolute;
+        bottom: 25%;
+        left: 30%;
+        width: 120px;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 1210px){
+    #IT{
+        position: absolute;
+        top: 25%;
+        right: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #CE{
+        position: absolute;
+        top: 40%;
+        right: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #ME{
+        position: absolute;
+        bottom: 40%;
+        right: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #EE{
+        position: absolute;
+        bottom: 25%;
+        right: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #CIVIL{
+        position: absolute;
+        top: 25%;
+        left: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #AUTO{
+        position: absolute;
+        top: 40%;
+        left: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #CHEMICAL{
+        position: absolute;
+        bottom: 40%;
+        left: 30%;
+        width: 120px;
+        text-align: center;
+    
+    }
+    #EC{
+        position: absolute;
+        bottom: 25%;
+        left: 30%;
+        width: 120px;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 920px){
+    #IT{
+        position: absolute;
+        top: 25%;
+        right: 25%;
+        width: 120px;
+        text-align: center;
+    }
+    #CE{
+        position: absolute;
+        top: 40%;
+        right: 25%;
+        width: 120px;
+        text-align: center;
+    }
+    #ME{
+        position: absolute;
+        bottom: 40%;
+        right: 25%;
+        width: 120px;
+        text-align: center;
+    }
+    #EE{
+        position: absolute;
+        bottom: 25%;
+        right: 25%;
+        width: 120px;
+        text-align: center;
+    }
+    #CIVIL{
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        width: 120px;
+        text-align: center;
+    }
+    #AUTO{
+        position: absolute;
+        top: 40%;
+        left: 25%;
+        width: 120px;
+        text-align: center;
+    }
+    #CHEMICAL{
+        position: absolute;
+        bottom: 40%;
+        left: 25%;
+        width: 120px;
+        text-align: center;
+    
+    }
+    #EC{
+        position: absolute;
+        bottom: 25%;
+        left: 25%;
+        width: 120px;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 720px){
+    #IT{
+        position: absolute;
+        top: 25%;
+        right: 20%;
+        width: 120px;
+        text-align: center;
+    }
+    #CE{
+        position: absolute;
+        top: 40%;
+        right: 20%;
+        width: 120px;
+        text-align: center;
+    }
+    #ME{
+        position: absolute;
+        bottom: 40%;
+        right: 20%;
+        width: 120px;
+        text-align: center;
+    }
+    #EE{
+        position: absolute;
+        bottom: 25%;
+        right: 20%;
+        width: 120px;
+        text-align: center;
+    }
+    #CIVIL{
+        position: absolute;
+        top: 25%;
+        left: 20%;
+        width: 120px;
+        text-align: center;
+    }
+    #AUTO{
+        position: absolute;
+        top: 40%;
+        left: 20%;
+        width: 120px;
+        text-align: center;
+    }
+    #CHEMICAL{
+        position: absolute;
+        bottom: 40%;
+        left: 20%;
+        width: 120px;
+        text-align: center;
+    
+    }
+    #EC{
+        position: absolute;
+        bottom: 25%;
+        left: 20%;
+        width: 120px;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 610px){
+    #IT{
+        position: absolute;
+        top: 25%;
+        right: 15%;
+        width: 120px;
+        text-align: center;
+    }
+    #CE{
+        position: absolute;
+        top: 40%;
+        right: 15%;
+        width: 120px;
+        text-align: center;
+    }
+    #ME{
+        position: absolute;
+        bottom: 40%;
+        right: 15%;
+        width: 120px;
+        text-align: center;
+    }
+    #EE{
+        position: absolute;
+        bottom: 25%;
+        right: 15%;
+        width: 120px;
+        text-align: center;
+    }
+    #CIVIL{
+        position: absolute;
+        top: 25%;
+        left: 15%;
+        width: 120px;
+        text-align: center;
+    }
+    #AUTO{
+        position: absolute;
+        top: 40%;
+        left: 15%;
+        width: 120px;
+        text-align: center;
+    }
+    #CHEMICAL{
+        position: absolute;
+        bottom: 40%;
+        left: 15%;
+        width: 120px;
+        text-align: center;
+    
+    }
+    #EC{
+        position: absolute;
+        bottom: 25%;
+        left: 15%;
+        width: 120px;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 425px){
+    #IT{
+        position: absolute;
+        top: 20%;
+        right: 16%;
+        width: 120px;
+        text-align: center;
+    }
+    #CE{
+        position: absolute;
+        top: 35%;
+        right: 16%;
+        width: 120px;
+        text-align: center;
+    }
+    #ME{
+        position: absolute;
+        bottom: 35%;
+        right: 16%;
+        width: 120px;
+        text-align: center;
+    }
+    #EE{
+        position: absolute;
+        bottom: 20%;
+        right: 16%;
+        width: 120px;
+        text-align: center;
+    }
+    #CIVIL{
+        position: absolute;
+        top: 20%;
+        left: 16%;
+        width: 120px;
+        text-align: center;
+    }
+    #AUTO{
+        position: absolute;
+        top: 35%;
+        left: 16%;
+        width: 120px;
+        text-align: center;
+    }
+    #CHEMICAL{
+        position: absolute;
+        bottom: 35%;
+        left: 16%;
+        width: 120px;
+        text-align: center;
+    
+    }
+    #EC{
+        position: absolute;
+        bottom: 20%;
+        left: 16%;
+        width: 120px;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 350px){
+    #IT{
+        position: absolute;
+        top: 9%;
+        right: 31.5%;
+        width: 120px;
+        text-align: center;
+    }
+    #CE{
+        position: absolute;
+        top: 29%;
+        right: 31.5%;
+        width: 120px;
+        text-align: center;
+    }
+    #ME{
+        position: absolute;
+        bottom: 39%;
+        right: 31.5%;
+        width: 120px;
+        text-align: center;
+    }
+    #EE{
+        position: absolute;
+        bottom: 29%;
+        right: 31.5%;
+        width: 120px;
+        text-align: center;
+    }
+    #CIVIL{
+        position: absolute;
+        top: 19%;
+        left: 31%;
+        width: 120px;
+        text-align: center;
+    }
+    #AUTO{
+        position: absolute;
+        top: 39%;
+        left: 31%;
+        width: 120px;
+        text-align: center;
+    }
+    #CHEMICAL{
+        position: absolute;
+        bottom: 19%;
+        left: 31%;
+        width: 120px;
+        text-align: center;
+    
+    }
+    #EC{
+        position: absolute;
+        bottom: 9%;
+        left: 31%;
+        width: 120px;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 280px){
+    #IT{
+        position: absolute;
+        top: 9%;
+        right: 28%;
+        width: 120px;
+        text-align: center;
+    }
+    #CE{
+        position: absolute;
+        top: 29%;
+        right: 28%;
+        width: 120px;
+        text-align: center;
+    }
+    #ME{
+        position: absolute;
+        bottom: 39%;
+        right: 28%;
+        width: 120px;
+        text-align: center;
+    }
+    #EE{
+        position: absolute;
+        bottom: 29%;
+        right: 28%;
+        width: 120px;
+        text-align: center;
+    }
+    #CIVIL{
+        position: absolute;
+        top: 19%;
+        left: 29%;
+        width: 120px;
+        text-align: center;
+    }
+    #AUTO{
+        position: absolute;
+        top: 39%;
+        left: 30%;
+        width: 120px;
+        text-align: center;
+    }
+    #CHEMICAL{
+        position: absolute;
+        bottom: 19%;
+        left: 30%;
+        width: 120px;
+        text-align: center;
+    
+    }
+    #EC{
+        position: absolute;
+        bottom: 9%;
+        left: 30%;
+        width: 120px;
+        text-align: center;
+    }
+}

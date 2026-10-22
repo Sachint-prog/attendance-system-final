@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Attendance</title>
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/update_taken_attendance.css" />
+    <style>
+      .page_box{
+        position: absolute;
+      }
+    </style>
+    <style>
+      footer{
+          position: absolute;
+          left: 0;
+          bottom: -50%;
+          width: 100%;
+      }
+      .container_footer {
+          background-color: #333;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+      }
+      .footer {
+          background-color: #333;
+          color: #fff;
+          padding-top: 40px;
+          height: 300px;
+      }
+      .logo img {
+          max-width: 100px;
+      }
+      .introduction {
+          max-width: 400px;
+          padding: 25px;
+      }
+      .contact_us {
+          /* border: 1px solid #fff; */
+          max-width: 300px;
+      }
+      .contact_us h1 {
+          font-size: 24px;
+          margin-bottom: 15px;
+      }
+      .social_media {
+          background-color: #333;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-top: 20px;
+      }
+      .social_media i {
+          font-size: 24px;
+          color: #fff;
+          margin: 0 10px;
+          transition: color 0.3s;
+      }
+      .social_media i:hover {
+          color: #ffd700; 
+      }
+  </style>
+  </head>
+  <body>
+    <a href="/<%=user_id.role%>"><i class="bx bxs-home"></i></a>
+
+    <% if(attendance == "no"){ %>
+
+      <form
+        class="form"
+        action="/<%=user_id.role%>/<%=info.faculty%>/<%=info.course%>/<%=info.branch%>/getUpdateTable"
+        method="post"
+      >
+        <input type="date" name="datetime" id="datetime" placeholder="datetime" class="option_3">
+        <select class="option_1" name="sem" id="sem">
+          <option value="">select a semister</option>
+          <% for(let i = 0; i < sem.length; i++){ %>
+          <option value="<%= sem[i].sem %>"><%= sem[i].sem %></option>
+          <% } %>
+        </select>
+        <select class="option_2" name="subject" id="subject">
+          <option value="">select a subject</option>
+        </select>
+        <div class="lecture_container">
+          <div class="lecture_1">
+              <input type="checkbox" name="lecture" id="lecture_1" value="1" />
+              <label for="lecture_1">Lecture 1</label>
+          </div>
+          <div class="lecture_2">
+              <input type="checkbox" name="lecture" id="lecture_2" value="2" />
+              <label for="lecture_2">Lecture 2</label>
+          </div>
+          <div class="lecture_3">
+              <input type="checkbox" name="lecture" id="lecture_3" value="3" />
+              <label for="lecture_3">Lecture 3</label>
+          </div>
+          <div class="lecture_4">
+              <input type="checkbox" name="lecture" id="lecture_4" value="4" />
+              <label for="lecture_4">Lecture 4</label>
+          </div>
+          <div class="lecture_5">
+              <input type="checkbox" name="lecture" id="lecture_5" value="5" />
+              <label for="lecture_5">Lecture 5</label>
+          </div>
+          <div class="lecture_6">
+              <input type="checkbox" name="lecture" id="lecture_6" value="6" />
+              <label for="lecture_6">Lecture 6</label>
+          </div>
+        </div>
+        <button class="log_btn_1" type="submit" id="submit_btn">submit</button>
+      </form>
+
+      <footer class="footer">
+        <div class="container_footer">
+            <div class="logo_footer">
+                <img src="/img/favicon.png" alt="image" height="100px" width="100px">
+            </div>
+            <div class="introduction">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem numquam, quod ut accusamus pariatur qui odio tempore eveniet libero enim ducimus eligendi officia fugiat magni dolorem, vero explicabo commodi voluptatibus rem aliquid. Quisquam unde in at cumque quaerat eaque, facilis sapiente illo accusantium amet repellendus nesciunt ratione. Consequatur, qui similique.</p>
+            </div>
+            <div class="contact_us">
+                <h1>Contact Us</h1>
+                <!-- <label for="Email">Email</label>
+                <input type="email" name="Email"> -->
+                <h3>Email - muhkvps.sas@gmail.com</h3>
+            </div>
+        </div>
+        <div class="container1_footer">
+            <div class="social_media">
+                <a href="#">
+                    <i class='bx bxl-meta'></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-instagram-alt' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-facebook-circle' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-instagram' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-twitter' ></i>
+                </a>
+            </div>
+        </div>
+      </footer>
+    <% } %>
+
+    
+
+
+
+    <% if(attendance != "no"){ %>
+      <form class="form">
+
+        <input type="date" name="datetime" id="datetime" placeholder="datetime" class="option_3" value="<%= form_info.date_time%>">
+
+        <select class="option_1" name="sem" id="sem">
+          <option value="<%= form_info.sem %>"><%= form_info.sem %></option>
+        </select>
+        <select class="option_2" name="subject" id="subject">
+          <option value="<%= form_info.subject %>"><%= form_info.subject %></option>
+        </select>
+
+        <div class="lecture_container">
+          <% for(let i = 0; i < form_info.lectures.length; i++){ %>
+            <% if(form_info.lectures[i] != undefined){ %> 
+              <div class="<%= form_info.lectures[i] %>">
+                  <input class="lecture" checked type="checkbox" name="lecture" id="<%= form_info.lectures[i] %>" value="<%= form_info.lectures[i] %>" />
+                  <label for="<%= form_info.lectures[i] %>"><%= form_info.lectures[i] %></label>
+              </div>
+            <% } %>
+          <% } %>
+        </div>
+
+        <button class="log_btn_1" type="submit" id="submit_btn">submit</button>
+      </form>
+
+
+      <form
+        class="table_"
+        id="table_form"
+      >
+        <table border="">
+          <tr>
+            <th class="srno">srno</th>
+            <th class="checkbox">
+              <input type="checkbox" name="selectAll" id="selectAll" />
+              <label for="selectAll">selectAll</label>
+            </th>
+            <th class="en">enrollment no</th>
+            <th class="name">name</th>
+          </tr>
+
+          <% for(let i = 0; i < attendance.length; i++){ %>
+          <tr>
+            <td class="srno"><%= attendance[i].sr_no %></td>
+            <td class="checkbox">
+              <input
+                type="checkbox"
+                name="<%= attendance[i].Enrollment_no %>"
+                class="options"
+                id="<%= attendance[i].Enrollment_no %>"
+              />
+              <label
+                id="<%= attendance[i].Enrollment_no %>_label"
+                for="<%= attendance[i].Enrollment_no %>"
+                class="label_name"
+                >p/a</label
+              >
+            </td>
+            <td class="en"><%= attendance[i].Enrollment_no %></td>
+            <td class="name"><%= attendance[i].Student_name %></td>
+          </tr>
+          <% } %>
+        </table>
+
+        <div class="p">
+          <input type="radio" name="attendance" id="present" value="present" />
+          <label for="present">present</label>
+        </div>
+        <div class="a">
+          <input type="radio" name="attendance" id="absent" value="absent" />
+          <label for="absent">absent</label>
+        </div>
+        <button class="log_btn_2" id="reset">reset</button>
+        <button class="log_btn_3" type="submit" id="submit">submit</button>
+      </form>
+
+      <!-- <form class="page_box">
+        <% for(let i = 0; i < pages_data.total_page; i++){ %>
+          <button id="p_<%=i+1%>" class="pages" value="<%=i+1%>"><%=i+1%></button>
+        <% } %>
+      </form> -->
+
+
+      <footer class="footer">
+        <div class="container_footer">
+            <div class="logo_footer">
+                <img src="/img/favicon.png" alt="image" height="100px" width="100px">
+            </div>
+            <div class="introduction">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem numquam, quod ut accusamus pariatur qui odio tempore eveniet libero enim ducimus eligendi officia fugiat magni dolorem, vero explicabo commodi voluptatibus rem aliquid. Quisquam unde in at cumque quaerat eaque, facilis sapiente illo accusantium amet repellendus nesciunt ratione. Consequatur, qui similique.</p>
+            </div>
+            <div class="contact_us">
+                <h1>Contact Us</h1>
+                <!-- <label for="Email">Email</label>
+                <input type="email" name="Email"> -->
+                <h3>Email - muhkvps.sas@gmail.com</h3>
+            </div>
+        </div>
+        <div class="container1_footer">
+            <div class="social_media">
+                <a href="#">
+                    <i class='bx bxl-meta'></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-instagram-alt' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-facebook-circle' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-instagram' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-twitter' ></i>
+                </a>
+            </div>
+        </div>
+      </footer>
+
+      <script>
+        let submit_btn = document.querySelector("#submit");
+        submit_btn.addEventListener("click", function (event) {
+          event.preventDefault()
+          let options = document.querySelectorAll(".options");
+          options.forEach((option) => {
+            option.checked = true;
+            // option.value = 'p/a'
+            // let id = option.id
+            // let label = `${id}_label`
+            // let label_elem = document.getElementById(`${label}`)
+            // label_elem.innerText = 'p/a'
+          });
+          let selectAll = document.querySelector("#selectAll");
+          selectAll.checked = false;
+          let present = document.querySelector("#present");
+          present.checked = false;
+          let absent = document.querySelector("#absent");
+          absent.checked = false;
+
+
+
+
+          let sem = document.querySelector("#sem")
+          let sem_value = sem.value
+          let subject = document.querySelector("#subject")
+          let subject_value = subject.value
+          let lectures = document.querySelectorAll(".lecture")
+          let lectures_value = []
+          lectures.forEach(lecture => {
+            console.log(lecture.value)
+            lectures_value.push(lecture.value)
+          });
+
+          let attendance_send = document.querySelectorAll(".options")
+          let attendance_send_value = []
+          attendance_send.forEach(element => {
+            let info = {
+              enrollment_no: element.id,
+              attendance: element.value
+            }
+            attendance_send_value.push(info)
+          });
+          // console.log(lectures_value)
+
+          let url = window.location.href
+          let url_array = url.split("/")
+          let url_info = {
+            role: url_array[3],
+            faculty: url_array[4],
+            course: url_array[5],
+            branch: url_array[6]
+          }
+
+          let date = document.querySelector(".option_3")
+          let date_value = date.value
+          console.log(date_value)
+          let day = date_value.split("-")
+          // console.log(day)
+
+          if (day[2] < 10) {
+            let val = day[2].split("0")
+            console.log(val[1])
+
+            let date_value = `${day[0]}-${day[1]}-${val[1]}`
+            console.log(date_value)
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', `/${url_info.role}/${url_info.faculty}/${url_info.course}/${url_info.branch}/updateAttendance`, true)
+            xhr.setRequestHeader('Content-type', 'application/json')
+            xhr.onload = function () {
+              let data = JSON.parse(this.responseText)
+              console.log(data.link)
+              window.location.href = data.link
+                
+            }
+            
+            const send_data = JSON.stringify({
+              role: url_array[3],
+              faculty: url_array[4],
+              course: url_array[5],
+              branch: url_array[6],
+              sem: sem_value,
+              subject: subject_value,
+              datetime: date_value,
+              lectures: lectures_value,
+              attendance: attendance_send_value,
+            })
+            xhr.send(send_data)
+          }
+
+          else{
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', `/${url_info.role}/${url_info.faculty}/${url_info.course}/${url_info.branch}/updateAttendance`, true)
+            xhr.setRequestHeader('Content-type', 'application/json')
+            xhr.onload = function () {
+              let data = JSON.parse(this.responseText)
+              console.log(data.link)
+              window.location.href = data.link
+                
+            }
+            
+            const send_data = JSON.stringify({
+              role: url_array[3],
+              faculty: url_array[4],
+              course: url_array[5],
+              branch: url_array[6],
+              sem: sem_value,
+              subject: subject_value,
+              datetime: date_value,
+              lectures: lectures_value,
+              attendance: attendance_send_value,
+            })
+            xhr.send(send_data)
+          }
+          // console.log(date_value)
+
+          
+        });
+
+        let reset_btn = document.querySelector("#reset");
+        reset_btn.addEventListener("click", function () {
+          let options = document.querySelectorAll(".options");
+          options.forEach((option) => {
+            option.checked = false;
+            option.value = "p/a";
+            let id = option.id;
+            let label = `${id}_label`;
+            let label_elem = document.getElementById(`${label}`);
+            label_elem.innerText = "p/a";
+          });
+          let selectAll = document.querySelector("#selectAll");
+          selectAll.checked = false;
+          let present = document.querySelector("#present");
+          present.checked = false;
+          let absent = document.querySelector("#absent");
+          absent.checked = false;
+        });
+
+        let options = document.querySelectorAll(".options");
+        options.forEach((option) => {
+          option.addEventListener("click", function () {
+            // let id = option.id
+            // let label = `${id}_label`
+            // let label_elem = document.getElementById(`${label}`)
+            console.log(option.value);
+
+            if (option.value == "present") {
+              option.value = "absent";
+              let id = option.id;
+              let label = `${id}_label`;
+              let label_elem = document.getElementById(`${label}`);
+              label_elem.innerText = "absent";
+            } else if (option.value == "absent") {
+              option.value = "present";
+              let id = option.id;
+              let label = `${id}_label`;
+              let label_elem = document.getElementById(`${label}`);
+              label_elem.innerText = "present";
+            }
+          });
+        });
+
+        let selectAll = document.querySelector("#selectAll");
+        selectAll.addEventListener("click", function () {
+          let options = document.querySelectorAll(".options");
+
+          options.forEach((option) => {
+            if (selectAll.checked == true) {
+              option.checked = true;
+            } else {
+              option.checked = false;
+            }
+          });
+        });
+
+        let present = document.querySelector("#present");
+        present.addEventListener("click", function () {
+          let options = document.querySelectorAll(".options");
+
+          options.forEach((option) => {
+            if (option.checked == true) {
+              option.value = "present";
+              let id = option.id;
+              let label = `${id}_label`;
+              let label_elem = document.getElementById(`${label}`);
+              label_elem.innerText = "present";
+            } else {
+              option.value = "absent";
+              let id = option.id;
+              let label = `${id}_label`;
+              let label_elem = document.getElementById(`${label}`);
+              label_elem.innerText = "absent";
+            }
+          });
+        });
+
+        let absent = document.querySelector("#absent");
+        absent.addEventListener("click", function () {
+          let options = document.querySelectorAll(".options");
+
+          options.forEach((option) => {
+            if (option.checked == false) {
+              option.value = "present";
+              let id = option.id;
+              let label = `${id}_label`;
+              let label_elem = document.getElementById(`${label}`);
+              label_elem.innerText = "present";
+            } else {
+              option.value = "absent";
+              let id = option.id;
+              let label = `${id}_label`;
+              let label_elem = document.getElementById(`${label}`);
+              label_elem.innerText = "absent";
+            }
+          });
+        });
+
+
+      //   let pages = document.querySelectorAll(".pages")
+      // pages.forEach(page => {
+      //   page.addEventListener("click", function (event) {
+      //     event.preventDefault()
+      //     let page_value = page.value
+      //     let sem = document.querySelector("#sem")
+      //     let sem_value = sem.value
+      //     let subject = document.querySelector("#subject")
+      //     let subject_value = subject.value
+      //     let lectures = document.querySelectorAll(".lecture")
+      //     let lectures_value = []
+      //     lectures.forEach(lecture => {
+      //       console.log(lecture.value)
+      //       lectures_value.push(lecture.value)
+      //     });
+
+      //     let url = window.location.href
+      //     let url_array = url.split("/")
+      //     let url_info = {
+      //       role: url_array[3],
+      //       faculty: url_array[4],
+      //       course: url_array[5],
+      //       branch: url_array[6]
+      //     }
+
+      //     let date = document.querySelector(".option_3")
+      //     let date_value = date.value
+      //     console.log(date_value)
+      //     let day = date_value.split("-")
+      //     // console.log(day)
+
+      //     if (day[2] < 10) {
+      //       let val = day[2].split("0")
+      //       console.log(val[1])
+
+      //       let date_value = `${day[0]}-${day[1]}-${val[1]}`
+      //       console.log(date_value)
+
+      //       const xhr = new XMLHttpRequest();
+      //       xhr.open('POST', `/${url_info.role}/${url_info.faculty}/${url_info.course}/${url_info.branch}/update_pages`, true)
+      //       xhr.setRequestHeader('Content-type', 'application/json')
+      //       xhr.onload = function () {
+      //         let data = JSON.parse(this.responseText)
+      //         console.log(data.link)
+      //         // window.location.href = data.link
+      //         create_table(data)
+                
+      //       }
+            
+      //       const send_data = JSON.stringify({
+      //         role: url_array[3],
+      //         faculty: url_array[4],
+      //         course: url_array[5],
+      //         branch: url_array[6],
+      //         sem: sem_value,
+      //         subject: subject_value,
+      //         datetime: date_value,
+      //         lectures: lectures_value,
+      //         page: page_value
+      //       })
+      //       xhr.send(send_data)
+      //     }
+
+      //     else{
+      //       const xhr = new XMLHttpRequest();
+      //       xhr.open('POST', `/${url_info.role}/${url_info.faculty}/${url_info.course}/${url_info.branch}/update_pages`, true)
+      //       xhr.setRequestHeader('Content-type', 'application/json')
+      //       xhr.onload = function () {
+      //         let data = JSON.parse(this.responseText)
+      //         // console.log(data.link)
+      //         // window.location.href = data.link
+      //         create_table(data)
+      //         reset()
+      //         dummy()
+                
+      //       }
+            
+      //       const send_data = JSON.stringify({
+      //         role: url_array[3],
+      //         faculty: url_array[4],
+      //         course: url_array[5],
+      //         branch: url_array[6],
+      //         sem: sem_value,
+      //         subject: subject_value,
+      //         datetime: date_value,
+      //         lectures: lectures_value,
+      //         page: page_value
+      //       })
+      //       xhr.send(send_data)
+      //     }
+      //   })
+      // });
+
+      // function create_table(data) {
+      //   let  table = document.querySelector("table");
+      //   table.innerHTML = ``
+      //   let table_body = document.createElement("tbody");
+      //   table_body.innerHTML = `
+      //     <tr>
+      //       <th class='srno'>srno</th>
+      //       <th class='name'>name</th>
+      //       <th class='en'>enrollment no</th>
+      //       <th class='percentage'>attendance %</th>
+      //     </tr>
+      //   `;
+
+      //   let start = (data.pages_data.current_page - 1) * 30;
+      //   let end = data.pages_data.current_page * 30;
+      //   console.log(end)
+      //   console.log(data.pages_data.last_sr_no)
+
+      //   if (end > data.pages_data.last_sr_no) {
+      //     end = data.pages_data.last_sr_no
+      //     for(let i = start; i < end; i++){
+      //       console.log(i)
+      //       table_body.innerHTML += `
+      //         <tr>
+      //           <td class='srno'>${data.attendance[i].sr_no}</td>
+      //           <td class='checkbox'>
+      //             <input
+      //               type="checkbox"
+      //               name="${data.attendance[i].Enrollment_no}"
+      //               class="options"
+      //               id="${data.attendance[i].Enrollment_no}"
+      //             />
+      //             <label
+      //               id="${data.attendance[i].Enrollment_no}_label"
+      //               for="${data.attendance[i].Enrollment_no}"
+      //               class="label_name"
+      //               >p/a</label
+      //             >
+      //           </td>
+      //           <td class='en'>${data.attendance[i].Enrollment_no}</td>
+      //           <td class='name'>${data.attendance[i].Student_name}</td>
+      //         </tr>
+      //       `;
+      //     }
+
+      //     table.appendChild(table_body);
+      //   }
+      //   else{
+      //     for(let i = start; i < end; i++){
+      //       console.log(i)
+      //       table_body.innerHTML += `
+      //         <tr>
+      //           <td class='srno'>${data.attendance[i].sr_no}</td>
+      //           <td class='checkbox'>
+      //             <input
+      //               type="checkbox"
+      //               name="${data.attendance[i].Enrollment_no}"
+      //               class="options"
+      //               id="${data.attendance[i].Enrollment_no}"
+      //             />
+      //             <label
+      //               id="${data.attendance[i].Enrollment_no}_label"
+      //               for="${data.attendance[i].Enrollment_no}"
+      //               class="label_name"
+      //               >p/a</label
+      //             >
+      //           </td>
+      //           <td class='en'>${data.attendance[i].Enrollment_no}</td>
+      //           <td class='name'>${data.attendance[i].Student_name}</td>
+      //         </tr>
+      //       `;
+      //     }
+
+      //     table.appendChild(table_body);
+      //   }
+      // }
+
+      
+      // function reset() {
+      //     let options = document.querySelectorAll(".options");
+      //     options.forEach((option) => {
+      //       option.checked = false;
+      //       option.value = "p/a";
+      //       let id = option.id;
+      //       let label = `${id}_label`;
+      //       let label_elem = document.getElementById(`${label}`);
+      //       label_elem.innerText = "p/a";
+      //     });
+
+      //     let selectAll = document.querySelector("#selectAll");
+      //     selectAll.checked = false;
+      //     let present = document.querySelector("#present");
+      //     present.checked = false;
+      //     let absent = document.querySelector("#absent");
+      //     absent.checked = false;
+      // }
+
+      // function dummy() {
+        
+      //   let submit_btn = document.querySelector("#submit");
+      //   submit_btn.addEventListener("click", function (event) {
+      //     event.preventDefault()
+      //     let options = document.querySelectorAll(".options");
+      //     options.forEach((option) => {
+      //       option.checked = true;
+      //       // option.value = 'p/a'
+      //       // let id = option.id
+      //       // let label = `${id}_label`
+      //       // let label_elem = document.getElementById(`${label}`)
+      //       // label_elem.innerText = 'p/a'
+      //     });
+      //     let selectAll = document.querySelector("#selectAll");
+      //     selectAll.checked = false;
+      //     let present = document.querySelector("#present");
+      //     present.checked = false;
+      //     let absent = document.querySelector("#absent");
+      //     absent.checked = false;
+
+
+
+
+      //     let sem = document.querySelector("#sem")
+      //     let sem_value = sem.value
+      //     let subject = document.querySelector("#subject")
+      //     let subject_value = subject.value
+      //     let lectures = document.querySelectorAll(".lecture")
+      //     let lectures_value = []
+      //     lectures.forEach(lecture => {
+      //       console.log(lecture.value)
+      //       lectures_value.push(lecture.value)
+      //     });
+
+      //     let attendance_send = document.querySelectorAll(".options")
+      //     let attendance_send_value = []
+      //     attendance_send.forEach(element => {
+      //       let info = {
+      //         enrollment_no: element.id,
+      //         attendance: element.value
+      //       }
+      //       attendance_send_value.push(info)
+      //     });
+      //     // console.log(lectures_value)
+
+      //     let url = window.location.href
+      //     let url_array = url.split("/")
+      //     let url_info = {
+      //       role: url_array[3],
+      //       faculty: url_array[4],
+      //       course: url_array[5],
+      //       branch: url_array[6]
+      //     }
+
+      //     const xhr = new XMLHttpRequest();
+      //     xhr.open('POST', `/${url_info.role}/${url_info.faculty}/${url_info.course}/${url_info.branch}/addAttendance`, true)
+      //     xhr.setRequestHeader('Content-type', 'application/json')
+      //     xhr.onload = function () {
+      //       let data = JSON.parse(this.responseText)
+      //       console.log(data.link)
+      //       window.location.href = data.link
+      //     }
+          
+      //     const send_data = JSON.stringify({
+      //       role: url_array[3],
+      //       faculty: url_array[4],
+      //       course: url_array[5],
+      //       branch: url_array[6],
+      //       sem: sem_value,
+      //       subject: subject_value,
+      //       lectures: lectures_value,
+      //       attendance: attendance_send_value
+      //     })
+      //     xhr.send(send_data)
+      //   });
+
+      //   let reset_btn = document.querySelector("#reset");
+      //   reset_btn.addEventListener("click", function (event) {
+      //     event.preventDefault()
+      //     let options = document.querySelectorAll(".options");
+      //     options.forEach((option) => {
+      //       option.checked = false;
+      //       option.value = "p/a";
+      //       let id = option.id;
+      //       let label = `${id}_label`;
+      //       let label_elem = document.getElementById(`${label}`);
+      //       label_elem.innerText = "p/a";
+      //     });
+      //     let selectAll = document.querySelector("#selectAll");
+      //     selectAll.checked = false;
+      //     let present = document.querySelector("#present");
+      //     present.checked = false;
+      //     let absent = document.querySelector("#absent");
+      //     absent.checked = false;
+
+      //   });
+
+      //   let options = document.querySelectorAll(".options");
+      //   options.forEach((option) => {
+      //     option.addEventListener("click", function () {
+      //       // let id = option.id
+      //       // let label = `${id}_label`
+      //       // let label_elem = document.getElementById(`${label}`)
+      //       console.log(option.value);
+
+      //       if (option.value == "present") {
+      //         option.value = "absent";
+      //         let id = option.id;
+      //         let label = `${id}_label`;
+      //         let label_elem = document.getElementById(`${label}`);
+      //         label_elem.innerText = "absent";
+      //       } else if (option.value == "absent") {
+      //         option.value = "present";
+      //         let id = option.id;
+      //         let label = `${id}_label`;
+      //         let label_elem = document.getElementById(`${label}`);
+      //         label_elem.innerText = "present";
+      //       }
+      //     });
+      //   });
+
+      //   let selectAll = document.querySelector("#selectAll");
+      //   selectAll.addEventListener("click", function () {
+      //     let options = document.querySelectorAll(".options");
+      //     console.log(options)
+
+      //     options.forEach((option) => {
+      //       if (selectAll.checked == true) {
+      //         option.checked = true;
+      //       } else {
+      //         option.checked = false;
+      //       }
+      //     });
+      //   });
+
+      //   let present = document.querySelector("#present");
+      //   present.addEventListener("click", function () {
+      //     let options = document.querySelectorAll(".options");
+
+      //     options.forEach((option) => {
+      //       if (option.checked == true) {
+      //         option.value = "present";
+      //         let id = option.id;
+      //         let label = `${id}_label`;
+      //         let label_elem = document.getElementById(`${label}`);
+      //         label_elem.innerText = "present";
+      //       } else {
+      //         option.value = "absent";
+      //         let id = option.id;
+      //         let label = `${id}_label`;
+      //         let label_elem = document.getElementById(`${label}`);
+      //         label_elem.innerText = "absent";
+      //       }
+      //     });
+      //   });
+
+      //   let absent = document.querySelector("#absent");
+      //   absent.addEventListener("click", function () {
+      //     let options = document.querySelectorAll(".options");
+
+      //     options.forEach((option) => {
+      //       if (option.checked == false) {
+      //         option.value = "present";
+      //         let id = option.id;
+      //         let label = `${id}_label`;
+      //         let label_elem = document.getElementById(`${label}`);
+      //         label_elem.innerText = "present";
+      //       } else {
+      //         option.value = "absent";
+      //         let id = option.id;
+      //         let label = `${id}_label`;
+      //         let label_elem = document.getElementById(`${label}`);
+      //         label_elem.innerText = "absent";
+      //       }
+      //     });
+      //   });
+
+
+      // }
+    
+      </script>
+    <% } %>
+    <script src="/js/take_attendance.js" type="module"></script>
+  </body>
+</html>

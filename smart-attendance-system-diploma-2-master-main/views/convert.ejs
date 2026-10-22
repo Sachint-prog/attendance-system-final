@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <% if (upload_option == 'dont_show') { %>
+      <form
+        class="form"
+        action="/<%=user_id.role%>/<%=info.faculty%>/<%=info.course%>/<%=info.branch%>/getUploadOption"
+        method="post"
+      >
+        <select class="option" name="sem" id="sem">
+          <option value="">select a semister</option>
+          <% for(let i = 0; i < sem.length; i++){ %>
+          <option value="<%= sem[i].sem %>"><%= sem[i].sem %></option>
+          <% } %>
+        </select>
+        <select class="option" name="subject" id="subject">
+          <option value="">select a subject</option>
+        </select>
+        <select class="option" name="table_type" id="subject_1">
+          <option value="">select table type</option>
+          <option value="Master">Master</option>
+          <option value="Monthly">Monthly</option>
+        </select>
+        <button class="log_btn" type="submit" id="submit_btn">submit</button>
+      </form>
+      <% } %>
+    <% if (upload_option !== 'dont_show') { %>
+      <form
+        class="form"
+        action="/<%=user_id.role%>/<%=info.faculty%>/<%=info.course%>/<%=info.branch%>/getUploadOption"
+        method="post"
+      >
+        <select class="option" name="sem" id="sem">
+          <option value="<%= info_upload.sem %>"><%= info_upload.sem %></option>
+        </select>
+        <select class="option" name="subject" id="subject">
+          <option value="<%= info_upload.subject %>"><%= info_upload.subject %></option>
+        </select>
+        <select class="option" name="table_type" id="subject">
+          <option value="<%= info_upload.table_type %>"><%= info_upload.table_type %></option>
+        </select>
+        <!-- <button class="log_btn" type="submit" id="submit_btn">submit</button> -->
+      </form>
+      <form
+        action="/<%=user_id.role%>/<%=info.faculty%>/<%=info.course%>/<%=info.branch%>/uploads_file"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <input type="file" accept=".csv" name="upload_file" />
+        <button type="submit">upload</button>
+      </form>
+    <% } %>
+
+    <script src="/js/upload.js"></script>
+  </body>
+</html>

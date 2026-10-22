@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scrollable Bar Chart</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            background-color: #eeedebc5;
+        }
+        #chartContainer {
+            width: 100%;   /* Adjust this as needed, e.g., 90vw */
+            height: 400px; /* Fixed height */
+            overflow-x: auto; /* Enable horizontal scrolling */
+            overflow-y: hidden;
+        }
+        #canvasWrapper {
+            height: 100%;
+        }
+        canvas {
+            display: block; /* Removes bottom margin/gap */
+        }
+        #legend-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 10vh;
+            width: auto;
+        }
+
+        .option_1{
+            width: 200px;
+            height: 30px;
+            padding: 0px 0px 0px 10px;
+        }
+        .option_3{
+            width: 200px;
+            height: 30px;
+            padding: 0px 0px 0px 10px;
+            font-size: 1em;
+        }
+        .log_btn_1{
+            padding: 12px 22px;
+            border-radius: 10%;
+            transition: 0.5s;
+            margin-left: 5px;
+            background-color: white;
+        }
+        .log_btn_1:hover{
+            scale: 1.2;
+            color: w;
+            background-color: rgba(0, 0, 0, 0.546);
+            color: white;
+        }
+        .option_container{
+            height: 7vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1em;
+        }
+        a .bxs-home{
+            font-size: 25px;
+            color: black;
+            margin: 20px;
+            transition: .3s;
+        }
+        a .bxs-home:hover{
+            scale: 1.2;
+            color: rgba(0, 0, 0, 0.836);
+            background-color: rgba(255, 255, 255, 0.546);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  
+        }
+        #tableId{
+            display: none;
+        }
+        #table_container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .log_btn_1{
+            /* position: absolute;
+            top: 27%; */
+            padding: 12px 22px;
+            border-radius: 10%;
+            transition: 0.5s;
+            margin-left: 5px;
+        }
+        .log_btn_1:hover{
+            scale: 1.1;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.546);
+            /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); */
+        }
+    </style>
+    <style>
+        footer{
+            position: absolute;
+            left: 0;
+            bottom: -50%;
+            width: 100%;
+        }
+        .container_footer {
+            background-color: #333;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding-top: 40px;
+            height: 300px;
+        }
+        .logo img {
+            max-width: 100px;
+        }
+        .introduction {
+            max-width: 400px;
+            padding: 25px;
+        }
+        .contact_us {
+            /* border: 1px solid #fff; */
+            max-width: 300px;
+        }
+        .contact_us h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .social_media {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
+        }
+        .social_media a i {
+            font-size: 24px;
+            color: #fff;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .social_media a i:hover {
+            color: #ffd700; 
+        }
+    </style>
+</head>
+<body>
+    <a href="/<%=user_id.role%>"><i class="bx bxs-home"></i></a>
+
+    <div class="option_container">
+        <select name="sem" id="sem" class="option_1">
+            <option value="">select a semister</option>
+    
+            <% for(let i = 0; i < sem.length; i++){ %>
+            <option value="<%= sem[i].sem %>"><%= sem[i].sem %></option>
+            <% } %>
+        </select>
+    
+        <select name="timeperiod" id="timeperiod" class="option_1">
+            <option value="">select a timeperiod</option>
+            <option value="daily">daily</option>
+            <option value="monthly">monthly</option>
+            <option value="total">total</option>
+        </select>
+    
+        <input type="search" name="search" id="search" placeholder="enrollment no" class="option_1">
+        <input type="date" name="date" id="date" class="option_3">
+    
+        <button type="submit" id="submit" class="log_btn_1">submit</button>
+    </div>    
+
+    <div id="legend-container"></div>
+
+    <div id="chartContainer">
+        <div id="canvasWrapper">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+    <main id="table_container">
+        <table id="tableId">
+
+        </table>
+
+        <button id="exportButton" class="log_btn_1">Export to Excel</button>
+    </main>
+
+    <footer class="footer">
+        <div class="container_footer">
+            <div class="logo_footer">
+                <img src="/img/favicon.png" alt="image" height="100px" width="100px">
+            </div>
+            <div class="introduction">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem numquam, quod ut accusamus pariatur qui odio tempore eveniet libero enim ducimus eligendi officia fugiat magni dolorem, vero explicabo commodi voluptatibus rem aliquid. Quisquam unde in at cumque quaerat eaque, facilis sapiente illo accusantium amet repellendus nesciunt ratione. Consequatur, qui similique.</p>
+            </div>
+            <div class="contact_us">
+                <h1>Contact Us</h1>
+                <!-- <label for="Email">Email</label>
+                <input type="email" name="Email"> -->
+                <h3>Email - muhkvps.sas@gmail.com</h3>
+            </div>
+        </div>
+        <div class="container1_footer">
+            <div class="social_media">
+                <a href="#">
+                    <i class='bx bxl-meta'></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-instagram-alt' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-facebook-circle' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-instagram' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-twitter' ></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+        const getOrCreateLegendList = (chart, id) => {
+            const legendContainer = document.getElementById(id);
+            let listContainer = legendContainer.querySelector('ul');
+
+            if (!listContainer) {
+                listContainer = document.createElement('ul');
+                listContainer.style.display = 'flex';
+                listContainer.style.flexDirection = 'row';
+                listContainer.style.margin = 0;
+                listContainer.style.padding = 0;
+
+                legendContainer.appendChild(listContainer);
+            }
+
+            return listContainer;
+        };
+
+        const htmlLegendPlugin = {
+            id: 'htmlLegend',
+            afterUpdate(chart, args, options) {
+                const ul = getOrCreateLegendList(chart, options.containerID);
+
+                // Remove old legend items
+                while (ul.firstChild) {
+                    ul.firstChild.remove();
+                }
+
+                // Reuse the built-in legendItems generator
+                const items = chart.options.plugins.legend.labels.generateLabels(chart);
+
+                items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.style.alignItems = 'center';
+                    li.style.cursor = 'pointer';
+                    li.style.display = 'flex';
+                    li.style.flexDirection = 'row';
+                    li.style.marginLeft = '10px';
+
+                    li.onclick = () => {
+                        const { type } = chart.config;
+                        if (type === 'pie' || type === 'doughnut') {
+                            // Pie and doughnut charts only have a single dataset and visibility is per item
+                            chart.toggleDataVisibility(item.index);
+                        } else {
+                            chart.setDatasetVisibility(item.datasetIndex, !chart.isDatasetVisible(item.datasetIndex));
+                        }
+                        chart.update();
+                    };
+
+                    // Color box
+                    const boxSpan = document.createElement('span');
+                    boxSpan.style.background = item.fillStyle;
+                    boxSpan.style.borderColor = item.strokeStyle;
+                    boxSpan.style.borderWidth = item.lineWidth + 'px';
+                    boxSpan.style.display = 'inline-block';
+                    boxSpan.style.flexShrink = 0;
+                    boxSpan.style.height = '20px';
+                    boxSpan.style.marginRight = '10px';
+                    boxSpan.style.width = '20px';
+
+                    // Text
+                    const textContainer = document.createElement('p');
+                    textContainer.style.color = item.fontColor;
+                    textContainer.style.margin = 0;
+                    textContainer.style.padding = 0;
+                    textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
+
+                    const text = document.createTextNode(item.text);
+                    textContainer.appendChild(text);
+
+                    li.appendChild(boxSpan);
+                    li.appendChild(textContainer);
+                    ul.appendChild(li);
+                });
+            }
+        };
+
+
+        let submit_btn = document.querySelector("#submit");
+        submit_btn.addEventListener("click", function (event) {
+            event.preventDefault()
+
+            let sem = document.querySelector("#sem")
+            let sem_value = sem.value
+    
+            let timeperiod = document.querySelector("#timeperiod")
+            let timeperiod_value = timeperiod.value
+    
+            let search = document.querySelector("#search")
+            let search_value = search.value
+    
+            let date = document.querySelector(".option_3")
+            let date_value = date.value
+            console.log(date_value)
+            let day = date_value.split("-")
+
+            let url = window.location.href
+            let url_array = url.split("/")
+            let url_info = {
+                role: url_array[3],
+                faculty: url_array[4],
+                course: url_array[5],
+                branch: url_array[6]
+            }
+
+            if (day[2] < 10) {
+                let val = day[2].split("0")
+                console.log(val[1])
+
+                let date_value = `${day[0]}-${day[1]}-${val[1]}`
+                console.log(date_value)
+
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', `/${url_info.role}/${url_info.faculty}/${url_info.course}/${url_info.branch}/get_student_chart`, true)
+                xhr.setRequestHeader('Content-type', 'application/json')
+                xhr.onload = function () {
+                    let data_from_backend = JSON.parse(this.responseText)
+                    console.log(data_from_backend)
+                    if (timeperiod_value == "daily") {
+                        create_table_daily(data_from_backend)
+                        daily_student_chart(data_from_backend)
+                    }
+                    else{
+                        create_table_monthly(data_from_backend)
+                        monthly_student_chart(data_from_backend)
+                    }
+                }
+                
+                const send_data = JSON.stringify({
+                    role: url_array[3],
+                    faculty: url_array[4],
+                    course: url_array[5],
+                    branch: url_array[6],
+                    sem: sem_value,
+                    date: date_value,
+                    search: search_value,
+                    timeperiod: timeperiod_value
+                })
+                xhr.send(send_data)
+            }
+            else{
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', `/${url_info.role}/${url_info.faculty}/${url_info.course}/${url_info.branch}/get_student_chart`, true)
+                xhr.setRequestHeader('Content-type', 'application/json')
+                xhr.onload = function () {
+                    let data_from_backend = JSON.parse(this.responseText)
+                    console.log(data_from_backend)
+                    if (timeperiod_value == "daily") {
+                        create_table_daily(data_from_backend)
+                        daily_student_chart(data_from_backend)
+                    }
+                    else{
+                        create_table_monthly(data_from_backend)
+                        monthly_student_chart(data_from_backend)
+                    }
+                }
+                
+                const send_data = JSON.stringify({
+                    role: url_array[3],
+                    faculty: url_array[4],
+                    course: url_array[5],
+                    branch: url_array[6],
+                    sem: sem_value,
+                    date: date_value,
+                    search: search_value,
+                    timeperiod: timeperiod_value
+                })
+                xhr.send(send_data)
+            }
+    
+            // const xhr = new XMLHttpRequest();
+            // xhr.open('POST', `/${url_info.role}/${url_info.faculty}/${url_info.course}/${url_info.branch}/get_student_chart`, true)
+            // xhr.setRequestHeader('Content-type', 'application/json')
+            // xhr.onload = function () {
+            //     let data_from_backend = JSON.parse(this.responseText)
+            //     console.log(data_from_backend)
+            //     if (timeperiod_value == "daily") {
+            //         create_table_daily(data_from_backend)
+            //         daily_student_chart(data_from_backend)
+            //     }
+            //     else{
+            //         create_table_monthly(data_from_backend)
+            //         monthly_student_chart(data_from_backend)
+            //     }
+            // }
+            
+            // const send_data = JSON.stringify({
+            //     role: url_array[3],
+            //     faculty: url_array[4],
+            //     course: url_array[5],
+            //     branch: url_array[6],
+            //     sem: sem_value,
+            //     date: date_value,
+            //     search: search_value,
+            //     timeperiod: timeperiod_value
+            // })
+            // xhr.send(send_data)
+        })
+
+
+
+        function daily_student_chart(data_from_backend) {
+            let color_lecture_1 = []
+            let lecture_1 = []
+            data_from_backend.lecture_1.forEach(element => {
+                if (element) {
+                    lecture_1.push(1)
+                    color_lecture_1.push('rgba(0,255,0,0.7)')
+                }
+                else{
+                    lecture_1.push(1)
+                    color_lecture_1.push('rgba(255,0,0, 0.7)')
+                }
+            });
+
+            let color_lecture_2 = []
+            let lecture_2 = []
+            data_from_backend.lecture_2.forEach(element => {
+                if (element) {
+                    lecture_2.push(1)
+                    color_lecture_2.push('rgba(0,255,0,0.7)')
+                }
+                else{
+                    lecture_2.push(1)
+                    color_lecture_2.push('rgba(255,0,0, 0.7)')
+                }
+            });
+
+            let color_lecture_3 = []
+            let lecture_3 = []
+            data_from_backend.lecture_3.forEach(element => {
+                if (element) {
+                    lecture_3.push(1)
+                    color_lecture_3.push('rgba(0,255,0,0.7)')
+                }
+                else{
+                    lecture_3.push(1)
+                    color_lecture_3.push('rgba(255,0,0, 0.7)')
+                }
+            });
+
+            let color_lecture_4 = []
+            let lecture_4 = []
+            data_from_backend.lecture_4.forEach(element => {
+                if (element) {
+                    lecture_4.push(1)
+                  // function daily_student_chart(data_from_backend) {
+                    color_lecture_4.push('rgba(0,255,0,0.7)')
+                }
+                else{
+                    lecture_4.push(1)
+                    color_lecture_4.push('rgba(255,0,0, 0.7)')
+                }
+            });
+
+            let color_lecture_5 = []
+            let lecture_5 = []
+            data_from_backend.lecture_5.forEach(element => {
+                if (element) {
+                    lecture_5.push(1)
+                    color_lecture_5.push('rgba(0,255,0,0.7)')
+                }
+                else{
+                    lecture_5.push(1)
+                    color_lecture_5.push('rgba(255,0,0, 0.7)')
+                }
+            });
+
+            let color_lecture_6 = []
+            let lecture_6 = []
+            data_from_backend.lecture_6.forEach(element => {
+                if (element) {
+                    lecture_6.push(1)
+                    color_lecture_6.push('rgba(0,255,0,0.7)')
+                }
+                else{
+                    lecture_6.push(1)
+                    color_lecture_6.push('rgba(255,0,0, 0.7)')
+                }
+            });
+            
+
+
+
+
+            const data = {
+                    labels: data_from_backend.student_en_no,
+                    datasets: [
+                        {
+                            label: 'lecture 1',
+                            data: lecture_1,
+                            borderWidth: 1,
+                            borderHeight:1,
+                            backgroundColor: color_lecture_1,
+                        },
+                        {
+                            label: 'lecture 2',
+                            data: lecture_2,
+                            borderWidth: 1,
+                            backgroundColor: color_lecture_2,
+                        },
+                        {
+                            label: 'lecture 3',
+                            data: lecture_3,
+                            borderWidth: 1,
+                            backgroundColor: color_lecture_3,
+                        },
+                        {
+                            label: 'lecture 4',
+                            data: lecture_4,
+                            borderWidth: 1,
+                            backgroundColor: color_lecture_4,
+                        },
+                        {
+                            label: 'lecture 5',
+                            data: lecture_5,
+                            borderWidth: 1,
+                            backgroundColor: color_lecture_5,
+                        },
+                        {
+                            label: 'lecture 6',
+                            data: lecture_6,
+                            borderWidth: 1,
+                            backgroundColor: color_lecture_6,
+                        },
+                        // {
+                        //     label: 'absent',
+                        //     data: [1],
+                        //     borderWidth: 1,
+                        //     backgroundColor: 'rgb(10, 10, 10)',
+                        // },
+                    ],
+                };
+        
+                const widthPerLabel = 100; // Set width per data point
+                const totalWidth = data.labels.length * widthPerLabel;
+                
+                const canvas = document.getElementById('myChart');
+                const ctx = canvas.getContext('2d');
+                const canvasWrapper = document.getElementById('canvasWrapper');
+        
+                // Set dynamic width based on the data
+                canvasWrapper.style.width = `${totalWidth}px`;
+        
+                const chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { stacked: true },
+                            y: {
+                                suggestedMin: 6,
+                                suggestedMax: 6,
+                                beginAtZero: true,
+                                stacked: true
+                            }
+                        },
+                        plugins: {
+                            htmlLegend: {
+                                // ID of the container to put the legend in
+                                containerID: 'legend-container',
+                            },
+                            legend: {
+                                display: false,
+                            }
+                        }
+                    },
+                    plugins: [htmlLegendPlugin],
+                });
+        }
+    
+
+        // function daily_student_chart(data_from_backend) {
+        //     let subjects = ['maths', 'science']
+        //     const data = {
+        //         labels: data_from_backend.student_en_no,
+        //         datasets: [
+        //             {
+        //                 label: 'lecture 1',
+        //                 data: data_from_backend.lecture_1,
+        //                 borderWidth: 1,
+        //                 backgroundColor: 'rgb(0, 0, 0)',
+        //                 subject: ['Maths','Science', 'physics','Chemistry','Biology'] // Assuming subject names are provided in data_from_backend
+        //             },
+        //             {
+        //                 label: 'lecture 2',
+        //                 data: data_from_backend.lecture_2,
+        //                 borderWidth: 1,
+        //                 backgroundColor: 'rgba(17,21,57,255)',
+        //                 subject: ['']
+        //             },
+        //             {
+        //                 label: 'lecture 3',
+        //                 data: data_from_backend.lecture_3,
+        //                 borderWidth: 1,
+        //                 backgroundColor: 'rgba(44,51,101,255)',
+        //                 subject: ['']
+        //             },
+        //             {
+        //                 label: 'lecture 4',
+        //                 data: data_from_backend.lecture_4,
+        //                 borderWidth: 1,
+        //                 backgroundColor: 'rgba(74,85,150,255)',
+        //                 subject: ['']
+        //             },
+        //             {
+        //                 label: 'lecture 5',
+        //                 data: data_from_backend.lecture_5,
+        //                 borderWidth: 1,
+        //                 backgroundColor: 'rgba(105,120,202,255)',
+        //                 subject: ['']
+        //             },
+        //             {
+        //                 label: 'lecture 6',
+        //                 data: data_from_backend.lecture_6,
+        //                 borderWidth: 1,
+        //                 backgroundColor: 'rgba(151,161,217,255)',
+        //                 subject: ['']
+        //             },
+        //         ],
+        //     };
+
+        //     const widthPerLabel = 100; // Set width per data point
+        //     const totalWidth = data.labels.length * widthPerLabel;
+
+        //     const canvas = document.getElementById('myChart');
+        //     const ctx = canvas.getContext('2d');
+        //     const canvasWrapper = document.getElementById('canvasWrapper');
+
+        //     // Set dynamic width based on the data
+        //     canvasWrapper.style.width = `${totalWidth}px`;
+
+        //     const chart = new Chart(ctx, {
+        //         type: 'bar',
+        //         data: data,
+        //         options: {
+        //             responsive: true,
+        //             maintainAspectRatio: false,
+        //             scales: {
+        //                 x: { stacked: true },
+        //                 y: {
+        //                     suggestedMin: 6,
+        //                     suggestedMax: 7,
+        //                     beginAtZero: true,
+        //                     stacked: true
+        //                 }
+        //             },
+        //             plugins: {
+        //                 tooltip: {
+        //                     callbacks: {
+        //                         title: function(context) {
+        //                             return `Student: ${data.labels[context[0].dataIndex]}`;
+        //                         },
+        //                         label: function(context) {
+        //                             const dataset = data.datasets[context.datasetIndex];
+        //                             return subjects;
+        //                         }
+        //                     }
+        //                 },
+        //                 htmlLegend: {
+        //                     // ID of the container to put the legend in
+        //                     containerID: 'legend-container',
+        //                 },
+        //                 legend: {
+        //                     display: false,
+        //                 }
+        //             }
+        //         },
+        //         plugins: [htmlLegendPlugin],
+        //     });
+        // }
+
+
+
+        function monthly_student_chart(data_from_backend) {
+            const data = {
+                    labels: data_from_backend.student_en_no,
+                    datasets: [
+                        {
+                            label: 'attendance percentage',
+                            data: data_from_backend.total,
+                            borderWidth: 1,
+                            backgroundColor: 'rgb(105, 120, 202)',
+                        },
+                    ]
+                };
+        
+                const widthPerLabel = 100; // Set width per data point
+                const totalWidth = data.labels.length * widthPerLabel;
+                
+                const canvas = document.getElementById('myChart');
+                const ctx = canvas.getContext('2d');
+                const canvasWrapper = document.getElementById('canvasWrapper');
+        
+                // Set dynamic width based on the data
+                if (totalWidth < 200) {
+                    canvasWrapper.style.width = `${200}px`;
+                }else{
+                    canvasWrapper.style.width = `${totalWidth}px`;
+                }
+        
+                const chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                stacked: true
+                            },
+                            y: {
+                                beginAtZero: true,
+                                stacked: true,
+                                suggestedMin: 50,
+                                suggestedMax: 100,
+                                ticks: {
+                                    // Include a dollar sign in the ticks
+                                    callback: function (value, index, ticks) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            htmlLegend: {
+                                // ID of the container to put the legend in
+                                containerID: 'legend-container',
+                            },
+                            legend: {
+                                display: false,
+                            }
+                        }
+                    },
+                    plugins: [htmlLegendPlugin],
+                });
+        }
+    
+        function create_table_monthly(data_from_backend) {
+            let branch = ['IT', 'CE', 'CIVIL', 'MECH', 'AUTO', 'CHEMICAL', 'EC', 'EE']
+
+            let  table = document.querySelector("table");
+            table.innerHTML = ``
+            let table_body = document.createElement("tbody");
+            table_body.innerHTML = `
+            <tr>
+                <th class='srno'>srno</th>
+                <th class='name'>name</th>
+                <th class='enno'>enrollment no</th>
+                <th class='percentage'>Attendance %</th>
+            </tr>
+            `;
+
+            for(let i = 0; i < data_from_backend.student_name.length; i++){
+                console.log(i)
+                table_body.innerHTML += `
+                <tr>
+                    <td class='srno'>${i + 1}</td>
+                    <td class='name'>${data_from_backend.student_name[i]}</td>
+                    <td class='enno'>${data_from_backend.student_en_no[i]}</td>
+                    <td class='percentage'>${data_from_backend.total[i]} %</td>
+                </tr>
+                `;
+            }
+
+            table.appendChild(table_body);
+        }
+
+        function create_table_daily(data_from_backend) {
+            let branch = ['IT', 'CE', 'CIVIL', 'MECH', 'AUTO', 'CHEMICAL', 'EC', 'EE']
+
+            let  table = document.querySelector("table");
+            table.innerHTML = ``
+            let table_body = document.createElement("tbody");
+            table_body.innerHTML = `
+            <tr>
+                <th class='srno'>srno</th>
+                <th class='name'>name</th>
+                <th class='enno'>enrollment no</th>
+                <th class='lecture1'>lecture1</th>
+                <th class='lecture2'>lecture2</th>
+                <th class='lecture3'>lecture3</th>
+                <th class='lecture4'>lecture4</th>
+                <th class='lecture5'>lecture5</th>
+                <th class='lecture6'>lecture6</th>
+            </tr>
+            `;
+
+            for(let i = 0; i < data_from_backend.student_name.length; i++){
+                console.log(i)
+                table_body.innerHTML += `
+                <tr>
+                    <td class='srno'>${i + 1}</td>
+                    <td class='name'>${data_from_backend.student_name[i]}</td>
+                    <td class='enno'>${data_from_backend.student_en_no[i]}</td>
+                    <td class='lecture1'>${data_from_backend.lecture_1[i]}</td>
+                    <td class='lecture2'>${data_from_backend.lecture_2[i]}</td>
+                    <td class='lecture3'>${data_from_backend.lecture_3[i]}</td>
+                    <td class='lecture4'>${data_from_backend.lecture_4[i]}</td>
+                    <td class='lecture5'>${data_from_backend.lecture_5[i]}</td>
+                    <td class='lecture6'>${data_from_backend.lecture_6[i]}</td>
+                </tr>
+                `;
+            }
+
+            table.appendChild(table_body);
+        }
+
+
+        function exportTableToExcel(tableId) {
+            const table = document.getElementById(tableId);
+            const html = table.outerHTML;
+            const blob = new Blob([html], {type: 'application/vnd.ms-excel'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+
+            a.href = url;
+            a.download = 'table.xls';
+            a.click();  
+            URL.revokeObjectURL(url);
+        }
+        
+        document.getElementById('exportButton').addEventListener('click', function() {
+            exportTableToExcel('tableId');
+        });    
+    
+    </script>
+    
+</body>
+</html>

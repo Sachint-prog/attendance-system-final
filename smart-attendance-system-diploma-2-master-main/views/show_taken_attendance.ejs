@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Attendance</title>
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/show_take_attendance.css">
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+        footer{
+            position: absolute;
+            left: 0;
+            bottom: -50%;
+            width: 100%;
+        }
+        .container_footer {
+            background-color: #333;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding-top: 40px;
+            height: 300px;
+        }
+        .logo img {
+            max-width: 100px;
+        }
+        .introduction {
+            max-width: 400px;
+            padding: 25px;
+        }
+        .contact_us {
+            /* border: 1px solid #fff; */
+            max-width: 300px;
+        }
+        .contact_us h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .social_media {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
+        }
+        .social_media a i {
+            font-size: 24px;
+            color: #fff;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .social_media a i:hover {
+            color: #ffd700; 
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="/<%=user_id.role%>/<%=info.faculty%>/<%=info.course%>/<%=info.branch%>/showTable" method="post">
+        <!-- <select name="course" id="course">
+            <option value="">select a course</option>
+            <option value="Diploma">Diploma</option>
+            <option value="Degree">Degree</option>
+        </select>
+        
+        <select name="branch" id="branch">
+            <option value="">select a branch</option>
+        </select> -->
+        <select class="option_1" name="sem" id="sem">
+            <option value="">select a semister</option>
+            <% for(let i=0; i < sem.length; i++){ %>
+                <option value="<%= sem[i].sem %>">
+                    <%= sem[i].sem %>
+                </option>
+                <% } %>
+        </select>
+        <select class="option_2" name="subject" id="subject">
+            <option value="">select a subject</option>
+        </select>
+        <input type="date" name="date_time" id="date_time" class="option_3">
+        
+        <button class="log_btn_1" type="submit" id="submit_btn">submit</button>
+    </form>
+
+    <form>
+        <% if(attendance !="no" ){ %>
+            <table>
+                <tr>
+                    <th class="srno">srno</th>
+                    <th class="en">enrollment no</th>
+                    <th class="name">name</th>
+                    <th class="<%= show_necessary.d1_l1%> attendance_1" >Day_1 Lecture_1</th>
+                    <th class="<%= show_necessary.d1_l2%> attendance_1" >Day_1 Lecture_2</th>
+                    <th class="<%= show_necessary.d1_l3%> attendance_1" >Day_1 Lecture_3</th>
+                    <th class="<%= show_necessary.d1_l4%> attendance_1" >Day_1 Lecture_4</th>
+                    <th class="<%= show_necessary.d1_l5%> attendance_1" >Day_1 Lecture_5</th>
+                    <th class="<%= show_necessary.d1_l6%> attendance_1" >Day_1 Lecture_6</th>
+                    <th class="<%= show_necessary.d2_l1%> attendance_1" >Day_2 Lecture_1</th>
+                    <th class="<%= show_necessary.d2_l2%> attendance_1" >Day_2 Lecture_2</th>
+                    <th class="<%= show_necessary.d2_l3%> attendance_1" >Day_2 Lecture_3</th>
+                    <th class="<%= show_necessary.d2_l4%> attendance_1" >Day_2 Lecture_4</th>
+                    <th class="<%= show_necessary.d2_l5%> attendance_1" >Day_2 Lecture_5</th>
+                    <th class="<%= show_necessary.d2_l6%> attendance_1" >Day_2 Lecture_6</th>
+                    <th class="<%= show_necessary.d3_l1%> attendance_1" >Day_3 Lecture_1</th>
+                    <th class="<%= show_necessary.d3_l2%> attendance_1" >Day_3 Lecture_2</th>
+                    <th class="<%= show_necessary.d3_l3%> attendance_1" >Day_3 Lecture_3</th>
+                    <th class="<%= show_necessary.d3_l4%> attendance_1" >Day_3 Lecture_4</th>
+                    <th class="<%= show_necessary.d3_l5%> attendance_1" >Day_3 Lecture_5</th>
+                    <th class="<%= show_necessary.d3_l6%> attendance_1" >Day_3 Lecture_6</th>
+                    <th class="<%= show_necessary.d4_l1%> attendance_1" >Day_4 Lecture_1</th>
+                    <th class="<%= show_necessary.d4_l2%> attendance_1" >Day_4 Lecture_2</th>
+                    <th class="<%= show_necessary.d4_l3%> attendance_1" >Day_4 Lecture_3</th>
+                    <th class="<%= show_necessary.d4_l4%> attendance_1" >Day_4 Lecture_4</th>
+                    <th class="<%= show_necessary.d4_l5%> attendance_1" >Day_4 Lecture_5</th>
+                    <th class="<%= show_necessary.d4_l6%> attendance_1" >Day_4 Lecture_6</th>
+                    <th class="<%= show_necessary.d5_l1%> attendance_1" >Day_5 Lecture_1</th>
+                    <th class="<%= show_necessary.d5_l2%> attendance_1" >Day_5 Lecture_2</th>
+                    <th class="<%= show_necessary.d5_l3%> attendance_1" >Day_5 Lecture_3</th>
+                    <th class="<%= show_necessary.d5_l4%> attendance_1" >Day_5 Lecture_4</th>
+                    <th class="<%= show_necessary.d5_l5%> attendance_1" >Day_5 Lecture_5</th>
+                    <th class="<%= show_necessary.d5_l6%> attendance_1" >Day_5 Lecture_6</th>
+                    <th class="<%= show_necessary.d6_l1%> attendance_1" >Day_6 Lecture_1</th>
+                    <th class="<%= show_necessary.d6_l2%> attendance_1" >Day_6 Lecture_2</th>
+                    <th class="<%= show_necessary.d6_l3%> attendance_1" >Day_6 Lecture_3</th>
+                    <th class="<%= show_necessary.d6_l4%> attendance_1" >Day_6 Lecture_4</th>
+                    <th class="<%= show_necessary.d6_l5%> attendance_1" >Day_6 Lecture_5</th>
+                    <th class="<%= show_necessary.d6_l6%> attendance_1" >Day_6 Lecture_6</th>
+                    <th class="<%= show_necessary.d7_l1%> attendance_1" >Day_7 Lecture_1</th>
+                    <th class="<%= show_necessary.d7_l2%> attendance_1" >Day_7 Lecture_2</th>
+                    <th class="<%= show_necessary.d7_l3%> attendance_1" >Day_7 Lecture_3</th>
+                    <th class="<%= show_necessary.d7_l4%> attendance_1" >Day_7 Lecture_4</th>
+                    <th class="<%= show_necessary.d7_l5%> attendance_1" >Day_7 Lecture_5</th>
+                    <th class="<%= show_necessary.d7_l6%> attendance_1" >Day_7 Lecture_6</th>
+                    <th class="<%= show_necessary.d8_l1%> attendance_1" >Day_8 Lecture_1</th>
+                    <th class="<%= show_necessary.d8_l2%> attendance_1" >Day_8 Lecture_2</th>
+                    <th class="<%= show_necessary.d8_l3%> attendance_1" >Day_8 Lecture_3</th>
+                    <th class="<%= show_necessary.d8_l4%> attendance_1" >Day_8 Lecture_4</th>
+                    <th class="<%= show_necessary.d8_l5%> attendance_1" >Day_8 Lecture_5</th>
+                    <th class="<%= show_necessary.d8_l6%> attendance_1" >Day_8 Lecture_6</th>
+                    <th class="<%= show_necessary.d9_l1%> attendance_1" >Day_9 Lecture_1</th>
+                    <th class="<%= show_necessary.d9_l2%> attendance_1" >Day_9 Lecture_2</th>
+                    <th class="<%= show_necessary.d9_l3%> attendance_1" >Day_9 Lecture_3</th>
+                    <th class="<%= show_necessary.d9_l4%> attendance_1" >Day_9 Lecture_4</th>
+                    <th class="<%= show_necessary.d9_l5%> attendance_1" >Day_9 Lecture_5</th>
+                    <th class="<%= show_necessary.d9_l6%> attendance_1" >Day_9 Lecture_6</th>
+                    <th class="<%= show_necessary.d10_l1%> attendance_1" >Day_10 Lecture_1</th>
+                    <th class="<%= show_necessary.d10_l2%> attendance_1" >Day_10 Lecture_2</th>
+                    <th class="<%= show_necessary.d10_l3%> attendance_1" >Day_10 Lecture_3</th>
+                    <th class="<%= show_necessary.d10_l4%> attendance_1" >Day_10 Lecture_4</th>
+                    <th class="<%= show_necessary.d10_l5%> attendance_1" >Day_10 Lecture_5</th>
+                    <th class="<%= show_necessary.d10_l6%> attendance_1" >Day_10 Lecture_6</th>
+                    <th class="<%= show_necessary.d11_l1%> attendance_1" >Day_11 Lecture_1</th>
+                    <th class="<%= show_necessary.d11_l2%> attendance_1" >Day_11 Lecture_2</th>
+                    <th class="<%= show_necessary.d11_l3%> attendance_1" >Day_11 Lecture_3</th>
+                    <th class="<%= show_necessary.d11_l4%> attendance_1" >Day_11 Lecture_4</th>
+                    <th class="<%= show_necessary.d11_l5%> attendance_1" >Day_11 Lecture_5</th>
+                    <th class="<%= show_necessary.d11_l6%> attendance_1" >Day_11 Lecture_6</th>
+                    <th class="<%= show_necessary.d12_l1%> attendance_1" >Day_12 Lecture_1</th>
+                    <th class="<%= show_necessary.d12_l2%> attendance_1" >Day_12 Lecture_2</th>
+                    <th class="<%= show_necessary.d12_l3%> attendance_1" >Day_12 Lecture_3</th>
+                    <th class="<%= show_necessary.d12_l4%> attendance_1" >Day_12 Lecture_4</th>
+                    <th class="<%= show_necessary.d12_l5%> attendance_1" >Day_12 Lecture_5</th>
+                    <th class="<%= show_necessary.d12_l6%> attendance_1" >Day_12 Lecture_6</th>
+                    <th class="<%= show_necessary.d13_l1%> attendance_1" >Day_13 Lecture_1</th>
+                    <th class="<%= show_necessary.d13_l2%> attendance_1" >Day_13 Lecture_2</th>
+                    <th class="<%= show_necessary.d13_l3%> attendance_1" >Day_13 Lecture_3</th>
+                    <th class="<%= show_necessary.d13_l4%> attendance_1" >Day_13 Lecture_4</th>
+                    <th class="<%= show_necessary.d13_l5%> attendance_1" >Day_13 Lecture_5</th>
+                    <th class="<%= show_necessary.d13_l6%> attendance_1" >Day_13 Lecture_6</th>
+                    <th class="<%= show_necessary.d14_l1%> attendance_1" >Day_14 Lecture_1</th>
+                    <th class="<%= show_necessary.d14_l2%> attendance_1" >Day_14 Lecture_2</th>
+                    <th class="<%= show_necessary.d14_l3%> attendance_1" >Day_14 Lecture_3</th>
+                    <th class="<%= show_necessary.d14_l4%> attendance_1" >Day_14 Lecture_4</th>
+                    <th class="<%= show_necessary.d14_l5%> attendance_1" >Day_14 Lecture_5</th>
+                    <th class="<%= show_necessary.d14_l6%> attendance_1" >Day_14 Lecture_6</th>
+                    <th class="<%= show_necessary.d15_l1%> attendance_1" >Day_15 Lecture_1</th>
+                    <th class="<%= show_necessary.d15_l2%> attendance_1" >Day_15 Lecture_2</th>
+                    <th class="<%= show_necessary.d15_l3%> attendance_1" >Day_15 Lecture_3</th>
+                    <th class="<%= show_necessary.d15_l4%> attendance_1" >Day_15 Lecture_4</th>
+                    <th class="<%= show_necessary.d15_l5%> attendance_1" >Day_15 Lecture_5</th>
+                    <th class="<%= show_necessary.d15_l6%> attendance_1" >Day_15 Lecture_6</th>
+                    <th class="<%= show_necessary.d16_l1%> attendance_1" >Day_16 Lecture_1</th>
+                    <th class="<%= show_necessary.d16_l2%> attendance_1" >Day_16 Lecture_2</th>
+                    <th class="<%= show_necessary.d16_l3%> attendance_1" >Day_16 Lecture_3</th>
+                    <th class="<%= show_necessary.d16_l4%> attendance_1" >Day_16 Lecture_4</th>
+                    <th class="<%= show_necessary.d16_l5%> attendance_1" >Day_16 Lecture_5</th>
+                    <th class="<%= show_necessary.d16_l6%> attendance_1" >Day_16 Lecture_6</th>
+                    <th class="<%= show_necessary.d17_l1%> attendance_1" >Day_17 Lecture_1</th>
+                    <th class="<%= show_necessary.d17_l2%> attendance_1" >Day_17 Lecture_2</th>
+                    <th class="<%= show_necessary.d17_l3%> attendance_1" >Day_17 Lecture_3</th>
+                    <th class="<%= show_necessary.d17_l4%> attendance_1" >Day_17 Lecture_4</th>
+                    <th class="<%= show_necessary.d17_l5%> attendance_1" >Day_17 Lecture_5</th>
+                    <th class="<%= show_necessary.d17_l6%> attendance_1" >Day_17 Lecture_6</th>
+                    <th class="<%= show_necessary.d18_l1%> attendance_1" >Day_18 Lecture_1</th>
+                    <th class="<%= show_necessary.d18_l2%> attendance_1" >Day_18 Lecture_2</th>
+                    <th class="<%= show_necessary.d18_l3%> attendance_1" >Day_18 Lecture_3</th>
+                    <th class="<%= show_necessary.d18_l4%> attendance_1" >Day_18 Lecture_4</th>
+                    <th class="<%= show_necessary.d18_l5%> attendance_1" >Day_18 Lecture_5</th>
+                    <th class="<%= show_necessary.d18_l6%> attendance_1" >Day_18 Lecture_6</th>
+                    <th class="<%= show_necessary.d19_l1%> attendance_1" >Day_19 Lecture_1</th>
+                    <th class="<%= show_necessary.d19_l2%> attendance_1" >Day_19 Lecture_2</th>
+                    <th class="<%= show_necessary.d19_l3%> attendance_1" >Day_19 Lecture_3</th>
+                    <th class="<%= show_necessary.d19_l4%> attendance_1" >Day_19 Lecture_4</th>
+                    <th class="<%= show_necessary.d19_l5%> attendance_1" >Day_19 Lecture_5</th>
+                    <th class="<%= show_necessary.d19_l6%> attendance_1" >Day_19 Lecture_6</th>
+                    <th class="<%= show_necessary.d20_l1%> attendance_1" >Day_20 Lecture_1</th>
+                    <th class="<%= show_necessary.d20_l2%> attendance_1" >Day_20 Lecture_2</th>
+                    <th class="<%= show_necessary.d20_l3%> attendance_1" >Day_20 Lecture_3</th>
+                    <th class="<%= show_necessary.d20_l4%> attendance_1" >Day_20 Lecture_4</th>
+                    <th class="<%= show_necessary.d20_l5%> attendance_1" >Day_20 Lecture_5</th>
+                    <th class="<%= show_necessary.d20_l6%> attendance_1" >Day_20 Lecture_6</th>
+                    <th class="<%= show_necessary.d21_l1%> attendance_1" >Day_21 Lecture_1</th>
+                    <th class="<%= show_necessary.d21_l2%> attendance_1" >Day_21 Lecture_2</th>
+                    <th class="<%= show_necessary.d21_l3%> attendance_1" >Day_21 Lecture_3</th>
+                    <th class="<%= show_necessary.d21_l4%> attendance_1" >Day_21 Lecture_4</th>
+                    <th class="<%= show_necessary.d21_l5%> attendance_1" >Day_21 Lecture_5</th>
+                    <th class="<%= show_necessary.d21_l6%> attendance_1" >Day_21 Lecture_6</th>
+                    <th class="<%= show_necessary.d22_l1%> attendance_1" >Day_22 Lecture_1</th>
+                    <th class="<%= show_necessary.d22_l2%> attendance_1" >Day_22 Lecture_2</th>
+                    <th class="<%= show_necessary.d22_l3%> attendance_1" >Day_22 Lecture_3</th>
+                    <th class="<%= show_necessary.d22_l4%> attendance_1" >Day_22 Lecture_4</th>
+                    <th class="<%= show_necessary.d22_l5%> attendance_1" >Day_22 Lecture_5</th>
+                    <th class="<%= show_necessary.d22_l6%> attendance_1" >Day_22 Lecture_6</th>
+                    <th class="<%= show_necessary.d23_l1%> attendance_1" >Day_23 Lecture_1</th>
+                    <th class="<%= show_necessary.d23_l2%> attendance_1" >Day_23 Lecture_2</th>
+                    <th class="<%= show_necessary.d23_l3%> attendance_1" >Day_23 Lecture_3</th>
+                    <th class="<%= show_necessary.d23_l4%> attendance_1" >Day_23 Lecture_4</th>
+                    <th class="<%= show_necessary.d23_l5%> attendance_1" >Day_23 Lecture_5</th>
+                    <th class="<%= show_necessary.d23_l6%> attendance_1" >Day_23 Lecture_6</th>
+                    <th class="<%= show_necessary.d24_l1%> attendance_1" >Day_24 Lecture_1</th>
+                    <th class="<%= show_necessary.d24_l2%> attendance_1" >Day_24 Lecture_2</th>
+                    <th class="<%= show_necessary.d24_l3%> attendance_1" >Day_24 Lecture_3</th>
+                    <th class="<%= show_necessary.d24_l4%> attendance_1" >Day_24 Lecture_4</th>
+                    <th class="<%= show_necessary.d24_l5%> attendance_1" >Day_24 Lecture_5</th>
+                    <th class="<%= show_necessary.d24_l6%> attendance_1" >Day_24 Lecture_6</th>
+                    <th class="<%= show_necessary.d25_l1%> attendance_1" >Day_25 Lecture_1</th>
+                    <th class="<%= show_necessary.d25_l2%> attendance_1" >Day_25 Lecture_2</th>
+                    <th class="<%= show_necessary.d25_l3%> attendance_1" >Day_25 Lecture_3</th>
+                    <th class="<%= show_necessary.d25_l4%> attendance_1" >Day_25 Lecture_4</th>
+                    <th class="<%= show_necessary.d25_l5%> attendance_1" >Day_25 Lecture_5</th>
+                    <th class="<%= show_necessary.d25_l6%> attendance_1" >Day_25 Lecture_6</th>
+                    <th class="<%= show_necessary.d26_l1%> attendance_1" >Day_26 Lecture_1</th>
+                    <th class="<%= show_necessary.d26_l2%> attendance_1" >Day_26 Lecture_2</th>
+                    <th class="<%= show_necessary.d26_l3%> attendance_1" >Day_26 Lecture_3</th>
+                    <th class="<%= show_necessary.d26_l4%> attendance_1" >Day_26 Lecture_4</th>
+                    <th class="<%= show_necessary.d26_l5%> attendance_1" >Day_26 Lecture_5</th>
+                    <th class="<%= show_necessary.d26_l6%> attendance_1" >Day_26 Lecture_6</th>
+                    <th class="<%= show_necessary.d27_l1%> attendance_1" >Day_27 Lecture_1</th>
+                    <th class="<%= show_necessary.d27_l2%> attendance_1" >Day_27 Lecture_2</th>
+                    <th class="<%= show_necessary.d27_l3%> attendance_1" >Day_27 Lecture_3</th>
+                    <th class="<%= show_necessary.d27_l4%> attendance_1" >Day_27 Lecture_4</th>
+                    <th class="<%= show_necessary.d27_l5%> attendance_1" >Day_27 Lecture_5</th>
+                    <th class="<%= show_necessary.d27_l6%> attendance_1" >Day_27 Lecture_6</th>
+                    <th class="<%= show_necessary.d28_l1%> attendance_1" >Day_28 Lecture_1</th>
+                    <th class="<%= show_necessary.d28_l2%> attendance_1" >Day_28 Lecture_2</th>
+                    <th class="<%= show_necessary.d28_l3%> attendance_1" >Day_28 Lecture_3</th>
+                    <th class="<%= show_necessary.d28_l4%> attendance_1" >Day_28 Lecture_4</th>
+                    <th class="<%= show_necessary.d28_l5%> attendance_1" >Day_28 Lecture_5</th>
+                    <th class="<%= show_necessary.d28_l6%> attendance_1" >Day_28 Lecture_6</th>
+                    <th class="<%= show_necessary.d29_l1%> attendance_1" >Day_29 Lecture_1</th>
+                    <th class="<%= show_necessary.d29_l2%> attendance_1" >Day_29 Lecture_2</th>
+                    <th class="<%= show_necessary.d29_l3%> attendance_1" >Day_29 Lecture_3</th>
+                    <th class="<%= show_necessary.d29_l4%> attendance_1" >Day_29 Lecture_4</th>
+                    <th class="<%= show_necessary.d29_l5%> attendance_1" >Day_29 Lecture_5</th>
+                    <th class="<%= show_necessary.d29_l6%> attendance_1" >Day_29 Lecture_6</th>
+                    <th class="<%= show_necessary.d30_l1%> attendance_1" >Day_30 Lecture_1</th>
+                    <th class="<%= show_necessary.d30_l2%> attendance_1" >Day_30 Lecture_2</th>
+                    <th class="<%= show_necessary.d30_l3%> attendance_1" >Day_30 Lecture_3</th>
+                    <th class="<%= show_necessary.d30_l4%> attendance_1" >Day_30 Lecture_4</th>
+                    <th class="<%= show_necessary.d30_l5%> attendance_1" >Day_30 Lecture_5</th>
+                    <th class="<%= show_necessary.d30_l6%> attendance_1" >Day_30 Lecture_6</th>
+                    <th class="<%= show_necessary.d31_l1%> attendance_1" >Day_31 Lecture_1</th>
+                    <th class="<%= show_necessary.d31_l2%> attendance_1" >Day_31 Lecture_2</th>
+                    <th class="<%= show_necessary.d31_l3%> attendance_1" >Day_31 Lecture_3</th>
+                    <th class="<%= show_necessary.d31_l4%> attendance_1" >Day_31 Lecture_4</th>
+                    <th class="<%= show_necessary.d31_l5%> attendance_1" >Day_31 Lecture_5</th>
+                    <th class="<%= show_necessary.d31_l6%> attendance_1" >Day_31 Lecture_6</th>
+                    <th class="<%= show_necessary.d31_l6%> attendance_1" >Total</th>
+                    <!-- <th>Total</th> -->
+                </tr>
+
+                <% for(let i=0; i < attendance.length; i++){ %>
+                    <tr>
+                        <td class="srno">
+                            <%= attendance[i].sr_no %>
+                        </td>
+                        <td class="en">
+                            <%= attendance[i].Enrollment_no %>
+                        </td>
+                        <td class="name">
+                            <%= attendance[i].Student_name %>
+                        </td>
+
+                        <td class="<%= show_necessary.d1_l1%> attendance_1" > <%= attendance[i].d1_l1%> </td>
+                        <td class="<%= show_necessary.d1_l2%> attendance_1" > <%= attendance[i].d1_l2%> </td>
+                        <td class="<%= show_necessary.d1_l3%> attendance_1" > <%= attendance[i].d1_l3%> </td>
+                        <td class="<%= show_necessary.d1_l4%> attendance_1" > <%= attendance[i].d1_l4%> </td>
+                        <td class="<%= show_necessary.d1_l5%> attendance_1" > <%= attendance[i].d1_l5%> </td>
+                        <td class="<%= show_necessary.d1_l6%> attendance_1" > <%= attendance[i].d1_l6%> </td>
+
+                        <td class="<%= show_necessary.d2_l1%> attendance_1" > <%= attendance[i].d2_l1%> </td>
+                        <td class="<%= show_necessary.d2_l2%> attendance_1" > <%= attendance[i].d2_l2%> </td>
+                        <td class="<%= show_necessary.d2_l3%> attendance_1" > <%= attendance[i].d2_l3%> </td>
+                        <td class="<%= show_necessary.d2_l4%> attendance_1" > <%= attendance[i].d2_l4%> </td>
+                        <td class="<%= show_necessary.d2_l5%> attendance_1" > <%= attendance[i].d2_l5%> </td>
+                        <td class="<%= show_necessary.d2_l6%> attendance_1" > <%= attendance[i].d2_l6%> </td>
+
+                        <td class="<%= show_necessary.d3_l1%> attendance_1" > <%= attendance[i].d3_l1%> </td>
+                        <td class="<%= show_necessary.d3_l2%> attendance_1" > <%= attendance[i].d3_l2%> </td>
+                        <td class="<%= show_necessary.d3_l3%> attendance_1" > <%= attendance[i].d3_l3%> </td>
+                        <td class="<%= show_necessary.d3_l4%> attendance_1" > <%= attendance[i].d3_l4%> </td>
+                        <td class="<%= show_necessary.d3_l5%> attendance_1" > <%= attendance[i].d3_l5%> </td>
+                        <td class="<%= show_necessary.d3_l6%> attendance_1" > <%= attendance[i].d3_l6%> </td>
+
+                        <td class="<%= show_necessary.d4_l1%> attendance_1" > <%= attendance[i].d4_l1%> </td>
+                        <td class="<%= show_necessary.d4_l2%> attendance_1" > <%= attendance[i].d4_l2%> </td>
+                        <td class="<%= show_necessary.d4_l3%> attendance_1" > <%= attendance[i].d4_l3%> </td>
+                        <td class="<%= show_necessary.d4_l4%> attendance_1" > <%= attendance[i].d4_l4%> </td>
+                        <td class="<%= show_necessary.d4_l5%> attendance_1" > <%= attendance[i].d4_l5%> </td>
+                        <td class="<%= show_necessary.d4_l6%> attendance_1" > <%= attendance[i].d4_l6%> </td>
+
+                        <td class="<%= show_necessary.d5_l1%> attendance_1" > <%= attendance[i].d5_l1%> </td>
+                        <td class="<%= show_necessary.d5_l2%> attendance_1" > <%= attendance[i].d5_l2%> </td>
+                        <td class="<%= show_necessary.d5_l3%> attendance_1" > <%= attendance[i].d5_l3%> </td>
+                        <td class="<%= show_necessary.d5_l4%> attendance_1" > <%= attendance[i].d5_l4%> </td>
+                        <td class="<%= show_necessary.d5_l5%> attendance_1" > <%= attendance[i].d5_l5%> </td>
+                        <td class="<%= show_necessary.d5_l6%> attendance_1" > <%= attendance[i].d5_l6%> </td>
+
+                        <td class="<%= show_necessary.d6_l1%> attendance_1" > <%= attendance[i].d6_l1%> </td>
+                        <td class="<%= show_necessary.d6_l2%> attendance_1" > <%= attendance[i].d6_l2%> </td>
+                        <td class="<%= show_necessary.d6_l3%> attendance_1" > <%= attendance[i].d6_l3%> </td>
+                        <td class="<%= show_necessary.d6_l4%> attendance_1" > <%= attendance[i].d6_l4%> </td>
+                        <td class="<%= show_necessary.d6_l5%> attendance_1" > <%= attendance[i].d6_l5%> </td>
+                        <td class="<%= show_necessary.d6_l6%> attendance_1" > <%= attendance[i].d6_l6%> </td>
+
+                        <td class="<%= show_necessary.d7_l1%> attendance_1" > <%= attendance[i].d7_l1%> </td>
+                        <td class="<%= show_necessary.d7_l2%> attendance_1" > <%= attendance[i].d7_l2%> </td>
+                        <td class="<%= show_necessary.d7_l3%> attendance_1" > <%= attendance[i].d7_l3%> </td>
+                        <td class="<%= show_necessary.d7_l4%> attendance_1" > <%= attendance[i].d7_l4%> </td>
+                        <td class="<%= show_necessary.d7_l5%> attendance_1" > <%= attendance[i].d7_l5%> </td>
+                        <td class="<%= show_necessary.d7_l6%> attendance_1" > <%= attendance[i].d7_l6%> </td>
+
+                        <td class="<%= show_necessary.d8_l1%> attendance_1" > <%= attendance[i].d8_l1%> </td>
+                        <td class="<%= show_necessary.d8_l2%> attendance_1" > <%= attendance[i].d8_l2%> </td>
+                        <td class="<%= show_necessary.d8_l3%> attendance_1" > <%= attendance[i].d8_l3%> </td>
+                        <td class="<%= show_necessary.d8_l4%> attendance_1" > <%= attendance[i].d8_l4%> </td>
+                        <td class="<%= show_necessary.d8_l5%> attendance_1" > <%= attendance[i].d8_l5%> </td>
+                        <td class="<%= show_necessary.d8_l6%> attendance_1" > <%= attendance[i].d8_l6%> </td>
+
+                        <td class="<%= show_necessary.d9_l1%> attendance_1" > <%= attendance[i].d9_l1%> </td>
+                        <td class="<%= show_necessary.d9_l2%> attendance_1" > <%= attendance[i].d9_l2%> </td>
+                        <td class="<%= show_necessary.d9_l3%> attendance_1" > <%= attendance[i].d9_l3%> </td>
+                        <td class="<%= show_necessary.d9_l4%> attendance_1" > <%= attendance[i].d9_l4%> </td>
+                        <td class="<%= show_necessary.d9_l5%> attendance_1" > <%= attendance[i].d9_l5%> </td>
+                        <td class="<%= show_necessary.d9_l6%> attendance_1" > <%= attendance[i].d9_l6%> </td>
+
+                        <td class="<%= show_necessary.d10_l1%> attendance_1" > <%= attendance[i].d10_l1%> </td>
+                        <td class="<%= show_necessary.d10_l2%> attendance_1" > <%= attendance[i].d10_l2%> </td>
+                        <td class="<%= show_necessary.d10_l3%> attendance_1" > <%= attendance[i].d10_l3%> </td>
+                        <td class="<%= show_necessary.d10_l4%> attendance_1" > <%= attendance[i].d10_l4%> </td>
+                        <td class="<%= show_necessary.d10_l5%> attendance_1" > <%= attendance[i].d10_l5%> </td>
+                        <td class="<%= show_necessary.d10_l6%> attendance_1" > <%= attendance[i].d10_l6%> </td>
+
+                        <td class="<%= show_necessary.d11_l1%> attendance_1" > <%= attendance[i].d11_l1%> </td>
+                        <td class="<%= show_necessary.d11_l2%> attendance_1" > <%= attendance[i].d11_l2%> </td>
+                        <td class="<%= show_necessary.d11_l3%> attendance_1" > <%= attendance[i].d11_l3%> </td>
+                        <td class="<%= show_necessary.d11_l4%> attendance_1" > <%= attendance[i].d11_l4%> </td>
+                        <td class="<%= show_necessary.d11_l5%> attendance_1" > <%= attendance[i].d11_l5%> </td>
+                        <td class="<%= show_necessary.d11_l6%> attendance_1" > <%= attendance[i].d11_l6%> </td>
+
+                        <td class="<%= show_necessary.d12_l1%> attendance_1" > <%= attendance[i].d12_l1%> </td>
+                        <td class="<%= show_necessary.d12_l2%> attendance_1" > <%= attendance[i].d12_l2%> </td>
+                        <td class="<%= show_necessary.d12_l3%> attendance_1" > <%= attendance[i].d12_l3%> </td>
+                        <td class="<%= show_necessary.d12_l4%> attendance_1" > <%= attendance[i].d12_l4%> </td>
+                        <td class="<%= show_necessary.d12_l5%> attendance_1" > <%= attendance[i].d12_l5%> </td>
+                        <td class="<%= show_necessary.d12_l6%> attendance_1" > <%= attendance[i].d12_l6%> </td>
+
+                        <td class="<%= show_necessary.d13_l1%> attendance_1" > <%= attendance[i].d13_l1%> </td>
+                        <td class="<%= show_necessary.d13_l2%> attendance_1" > <%= attendance[i].d13_l2%> </td>
+                        <td class="<%= show_necessary.d13_l3%> attendance_1" > <%= attendance[i].d13_l3%> </td>
+                        <td class="<%= show_necessary.d13_l4%> attendance_1" > <%= attendance[i].d13_l4%> </td>
+                        <td class="<%= show_necessary.d13_l5%> attendance_1" > <%= attendance[i].d13_l5%> </td>
+                        <td class="<%= show_necessary.d13_l6%> attendance_1" > <%= attendance[i].d13_l6%> </td>
+
+                        <td class="<%= show_necessary.d14_l1%> attendance_1" > <%= attendance[i].d14_l1%> </td>
+                        <td class="<%= show_necessary.d14_l2%> attendance_1" > <%= attendance[i].d14_l2%> </td>
+                        <td class="<%= show_necessary.d14_l3%> attendance_1" > <%= attendance[i].d14_l3%> </td>
+                        <td class="<%= show_necessary.d14_l4%> attendance_1" > <%= attendance[i].d14_l4%> </td>
+                        <td class="<%= show_necessary.d14_l5%> attendance_1" > <%= attendance[i].d14_l5%> </td>
+                        <td class="<%= show_necessary.d14_l6%> attendance_1" > <%= attendance[i].d14_l6%> </td>
+
+                        <td class="<%= show_necessary.d15_l1%> attendance_1" > <%= attendance[i].d15_l1%> </td>
+                        <td class="<%= show_necessary.d15_l2%> attendance_1" > <%= attendance[i].d15_l2%> </td>
+                        <td class="<%= show_necessary.d15_l3%> attendance_1" > <%= attendance[i].d15_l3%> </td>
+                        <td class="<%= show_necessary.d15_l4%> attendance_1" > <%= attendance[i].d15_l4%> </td>
+                        <td class="<%= show_necessary.d15_l5%> attendance_1" > <%= attendance[i].d15_l5%> </td>
+                        <td class="<%= show_necessary.d15_l6%> attendance_1" > <%= attendance[i].d15_l6%> </td>
+
+                        <td class="<%= show_necessary.d16_l1%> attendance_1" > <%= attendance[i].d16_l1%> </td>
+                        <td class="<%= show_necessary.d16_l2%> attendance_1" > <%= attendance[i].d16_l2%> </td>
+                        <td class="<%= show_necessary.d16_l3%> attendance_1" > <%= attendance[i].d16_l3%> </td>
+                        <td class="<%= show_necessary.d16_l4%> attendance_1" > <%= attendance[i].d16_l4%> </td>
+                        <td class="<%= show_necessary.d16_l5%> attendance_1" > <%= attendance[i].d16_l5%> </td>
+                        <td class="<%= show_necessary.d16_l6%> attendance_1" > <%= attendance[i].d16_l6%> </td>
+
+                        <td class="<%= show_necessary.d17_l1%> attendance_1" > <%= attendance[i].d17_l1%> </td>
+                        <td class="<%= show_necessary.d17_l2%> attendance_1" > <%= attendance[i].d17_l2%> </td>
+                        <td class="<%= show_necessary.d17_l3%> attendance_1" > <%= attendance[i].d17_l3%> </td>
+                        <td class="<%= show_necessary.d17_l4%> attendance_1" > <%= attendance[i].d17_l4%> </td>
+                        <td class="<%= show_necessary.d17_l5%> attendance_1" > <%= attendance[i].d17_l5%> </td>
+                        <td class="<%= show_necessary.d17_l6%> attendance_1" > <%= attendance[i].d17_l6%> </td>
+
+                        <td class="<%= show_necessary.d18_l1%> attendance_1" > <%= attendance[i].d18_l1%> </td>
+                        <td class="<%= show_necessary.d18_l2%> attendance_1" > <%= attendance[i].d18_l2%> </td>
+                        <td class="<%= show_necessary.d18_l3%> attendance_1" > <%= attendance[i].d18_l3%> </td>
+                        <td class="<%= show_necessary.d18_l4%> attendance_1" > <%= attendance[i].d18_l4%> </td>
+                        <td class="<%= show_necessary.d18_l5%> attendance_1" > <%= attendance[i].d18_l5%> </td>
+                        <td class="<%= show_necessary.d18_l6%> attendance_1" > <%= attendance[i].d18_l6%> </td>
+
+                        <td class="<%= show_necessary.d19_l1%> attendance_1" > <%= attendance[i].d19_l1%> </td>
+                        <td class="<%= show_necessary.d19_l2%> attendance_1" > <%= attendance[i].d19_l2%> </td>
+                        <td class="<%= show_necessary.d19_l3%> attendance_1" > <%= attendance[i].d19_l3%> </td>
+                        <td class="<%= show_necessary.d19_l4%> attendance_1" > <%= attendance[i].d19_l4%> </td>
+                        <td class="<%= show_necessary.d19_l5%> attendance_1" > <%= attendance[i].d19_l5%> </td>
+                        <td class="<%= show_necessary.d19_l6%> attendance_1" > <%= attendance[i].d19_l6%> </td>
+
+                        <td class="<%= show_necessary.d20_l1%> attendance_1" > <%= attendance[i].d20_l1%> </td>
+                        <td class="<%= show_necessary.d20_l2%> attendance_1" > <%= attendance[i].d20_l2%> </td>
+                        <td class="<%= show_necessary.d20_l3%> attendance_1" > <%= attendance[i].d20_l3%> </td>
+                        <td class="<%= show_necessary.d20_l4%> attendance_1" > <%= attendance[i].d20_l4%> </td>
+                        <td class="<%= show_necessary.d20_l5%> attendance_1" > <%= attendance[i].d20_l5%> </td>
+                        <td class="<%= show_necessary.d20_l6%> attendance_1" > <%= attendance[i].d20_l6%> </td>
+
+                        <td class="<%= show_necessary.d21_l1%> attendance_1" > <%= attendance[i].d21_l1%> </td>
+                        <td class="<%= show_necessary.d21_l2%> attendance_1" > <%= attendance[i].d21_l2%> </td>
+                        <td class="<%= show_necessary.d21_l3%> attendance_1" > <%= attendance[i].d21_l3%> </td>
+                        <td class="<%= show_necessary.d21_l4%> attendance_1" > <%= attendance[i].d21_l4%> </td>
+                        <td class="<%= show_necessary.d21_l5%> attendance_1" > <%= attendance[i].d21_l5%> </td>
+                        <td class="<%= show_necessary.d21_l6%> attendance_1" > <%= attendance[i].d21_l6%> </td>
+
+                        <td class="<%= show_necessary.d22_l1%> attendance_1" > <%= attendance[i].d22_l1%> </td>
+                        <td class="<%= show_necessary.d22_l2%> attendance_1" > <%= attendance[i].d22_l2%> </td>
+                        <td class="<%= show_necessary.d22_l3%> attendance_1" > <%= attendance[i].d22_l3%> </td>
+                        <td class="<%= show_necessary.d22_l4%> attendance_1" > <%= attendance[i].d22_l4%> </td>
+                        <td class="<%= show_necessary.d22_l5%> attendance_1" > <%= attendance[i].d22_l5%> </td>
+                        <td class="<%= show_necessary.d22_l6%> attendance_1" > <%= attendance[i].d22_l6%> </td>
+
+                        <td class="<%= show_necessary.d23_l1%> attendance_1" > <%= attendance[i].d23_l1%> </td>
+                        <td class="<%= show_necessary.d23_l2%> attendance_1" > <%= attendance[i].d23_l2%> </td>
+                        <td class="<%= show_necessary.d23_l3%> attendance_1" > <%= attendance[i].d23_l3%> </td>
+                        <td class="<%= show_necessary.d23_l4%> attendance_1" > <%= attendance[i].d23_l4%> </td>
+                        <td class="<%= show_necessary.d23_l5%> attendance_1" > <%= attendance[i].d23_l5%> </td>
+                        <td class="<%= show_necessary.d23_l6%> attendance_1" > <%= attendance[i].d23_l6%> </td>
+
+                        <td class="<%= show_necessary.d24_l1%> attendance_1" > <%= attendance[i].d24_l1%> </td>
+                        <td class="<%= show_necessary.d24_l2%> attendance_1" > <%= attendance[i].d24_l2%> </td>
+                        <td class="<%= show_necessary.d24_l3%> attendance_1" > <%= attendance[i].d24_l3%> </td>
+                        <td class="<%= show_necessary.d24_l4%> attendance_1" > <%= attendance[i].d24_l4%> </td>
+                        <td class="<%= show_necessary.d24_l5%> attendance_1" > <%= attendance[i].d24_l5%> </td>
+                        <td class="<%= show_necessary.d24_l6%> attendance_1" > <%= attendance[i].d24_l6%> </td>
+
+                        <td class="<%= show_necessary.d25_l1%> attendance_1" > <%= attendance[i].d25_l1%> </td>
+                        <td class="<%= show_necessary.d25_l2%> attendance_1" > <%= attendance[i].d25_l2%> </td>
+                        <td class="<%= show_necessary.d25_l3%> attendance_1" > <%= attendance[i].d25_l3%> </td>
+                        <td class="<%= show_necessary.d25_l4%> attendance_1" > <%= attendance[i].d25_l4%> </td>
+                        <td class="<%= show_necessary.d25_l5%> attendance_1" > <%= attendance[i].d25_l5%> </td>
+                        <td class="<%= show_necessary.d25_l6%> attendance_1" > <%= attendance[i].d25_l6%> </td>
+
+                        <td class="<%= show_necessary.d26_l1%> attendance_1" > <%= attendance[i].d26_l1%> </td>
+                        <td class="<%= show_necessary.d26_l2%> attendance_1" > <%= attendance[i].d26_l2%> </td>
+                        <td class="<%= show_necessary.d26_l3%> attendance_1" > <%= attendance[i].d26_l3%> </td>
+                        <td class="<%= show_necessary.d26_l4%> attendance_1" > <%= attendance[i].d26_l4%> </td>
+                        <td class="<%= show_necessary.d26_l5%> attendance_1" > <%= attendance[i].d26_l5%> </td>
+                        <td class="<%= show_necessary.d26_l6%> attendance_1" > <%= attendance[i].d26_l6%> </td>
+
+                        <td class="<%= show_necessary.d27_l1%> attendance_1" > <%= attendance[i].d27_l1%> </td>
+                        <td class="<%= show_necessary.d27_l2%> attendance_1" > <%= attendance[i].d27_l2%> </td>
+                        <td class="<%= show_necessary.d27_l3%> attendance_1" > <%= attendance[i].d27_l3%> </td>
+                        <td class="<%= show_necessary.d27_l4%> attendance_1" > <%= attendance[i].d27_l4%> </td>
+                        <td class="<%= show_necessary.d27_l5%> attendance_1" > <%= attendance[i].d27_l5%> </td>
+                        <td class="<%= show_necessary.d27_l6%> attendance_1" > <%= attendance[i].d27_l6%> </td>
+
+                        <td class="<%= show_necessary.d28_l1%> attendance_1" > <%= attendance[i].d28_l1%> </td>
+                        <td class="<%= show_necessary.d28_l2%> attendance_1" > <%= attendance[i].d28_l2%> </td>
+                        <td class="<%= show_necessary.d28_l3%> attendance_1" > <%= attendance[i].d28_l3%> </td>
+                        <td class="<%= show_necessary.d28_l4%> attendance_1" > <%= attendance[i].d28_l4%> </td>
+                        <td class="<%= show_necessary.d28_l5%> attendance_1" > <%= attendance[i].d28_l5%> </td>
+                        <td class="<%= show_necessary.d28_l6%> attendance_1" > <%= attendance[i].d28_l6%> </td>
+
+                        <td class="<%= show_necessary.d29_l1%> attendance_1" > <%= attendance[i].d29_l1%> </td>
+                        <td class="<%= show_necessary.d29_l2%> attendance_1" > <%= attendance[i].d29_l2%> </td>
+                        <td class="<%= show_necessary.d29_l3%> attendance_1" > <%= attendance[i].d29_l3%> </td>
+                        <td class="<%= show_necessary.d29_l4%> attendance_1" > <%= attendance[i].d29_l4%> </td>
+                        <td class="<%= show_necessary.d29_l5%> attendance_1" > <%= attendance[i].d29_l5%> </td>
+                        <td class="<%= show_necessary.d29_l6%> attendance_1" > <%= attendance[i].d29_l6%> </td>
+
+                        <td class="<%= show_necessary.d30_l1%> attendance_1" > <%= attendance[i].d30_l1%> </td>
+                        <td class="<%= show_necessary.d30_l2%> attendance_1" > <%= attendance[i].d30_l2%> </td>
+                        <td class="<%= show_necessary.d30_l3%> attendance_1" > <%= attendance[i].d30_l3%> </td>
+                        <td class="<%= show_necessary.d30_l4%> attendance_1" > <%= attendance[i].d30_l4%> </td>
+                        <td class="<%= show_necessary.d30_l5%> attendance_1" > <%= attendance[i].d30_l5%> </td>
+                        <td class="<%= show_necessary.d30_l6%> attendance_1" > <%= attendance[i].d30_l6%> </td>
+
+                        <td class="<%= show_necessary.d31_l1%> attendance_1" > <%= attendance[i].d31_l1%> </td>
+                        <td class="<%= show_necessary.d31_l2%> attendance_1" > <%= attendance[i].d31_l2%> </td>
+                        <td class="<%= show_necessary.d31_l3%> attendance_1" > <%= attendance[i].d31_l3%> </td>
+                        <td class="<%= show_necessary.d31_l4%> attendance_1" > <%= attendance[i].d31_l4%> </td>
+                        <td class="<%= show_necessary.d31_l5%> attendance_1" > <%= attendance[i].d31_l5%> </td>
+                        <td class="<%= show_necessary.d31_l6%> attendance_1" > <%= attendance[i].d31_l6%> </td>
+
+                        <td class="<%= show_necessary.d31_l6%> attendance_1" > <%= attendance[i].total%> </td>
+                        
+                    </tr>
+                    <% } %>
+            </table>
+            <% } %>
+
+                <!-- <input type="radio" name="attendance" id="present" value="present">
+        <label for="present">present</label>
+        <input type="radio" name="attendance" id="absent" value="absent">
+        <label for="absent">absent</label>
+        <button id="reset">reset</button>
+        <button type="submit" id="submit">submit</button> -->
+    </form>
+
+    <footer class="footer">
+        <div class="container_footer">
+            <div class="logo_footer">
+                <img src="/img/favicon.png" alt="image" height="100px" width="100px">
+            </div>
+            <div class="introduction">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem numquam, quod ut accusamus pariatur qui odio tempore eveniet libero enim ducimus eligendi officia fugiat magni dolorem, vero explicabo commodi voluptatibus rem aliquid. Quisquam unde in at cumque quaerat eaque, facilis sapiente illo accusantium amet repellendus nesciunt ratione. Consequatur, qui similique.</p>
+            </div>
+            <div class="contact_us">
+                <h1>Contact Us</h1>
+                <!-- <label for="Email">Email</label>
+                <input type="email" name="Email"> -->
+                <h3>Email - muhkvps.sas@gmail.com</h3>
+            </div>
+        </div>
+        <div class="container1_footer">
+            <div class="social_media">
+                <a href="#">
+                    <i class='bx bxl-meta'></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-instagram-alt' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-facebook-circle' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-instagram' ></i>
+                </a>
+
+                <a href="#">
+                    <i class='bx bxl-twitter' ></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/show_taken_attendance.js" type="module"></script>
+</body>
+
+</html>
